@@ -79,8 +79,7 @@
       /* ---------- BỐ CỤC MASTER - DETAIL ---------- */
       .goc-giai-tri-container { display: flex; gap: 36px; width: 100%; max-width: 1440px; margin: 0 auto; text-align: left; }
       
-      .danh-sach-truyen { flex: 0 0 320px; background: var(--paper); padding: 24px; border-radius: 8px; border: 1px solid var(--stone); box-shadow: 0 24px 60px rgba(12, 27, 46, 0.05); height: fit-content; position: sticky;
-        top: 100px; }
+      .danh-sach-truyen { flex: 0 0 320px; background: var(--paper); padding: 24px; border-radius: 8px; border: 1px solid var(--stone); box-shadow: 0 24px 60px rgba(12, 27, 46, 0.05); height: fit-content; position: sticky; top: 100px; }
       .danh-sach-truyen h3 { font-family: var(--serif); color: var(--navy-800); margin-top: 0; border-bottom: 1px solid var(--stone); padding-bottom: 16px; margin-bottom: 16px; font-size: 1.25em; font-weight: 600; }
       .menu-group { margin-bottom: 8px; }
       .menu-parent { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(12, 27, 46, 0.03); border-radius: 6px; cursor: pointer; font-weight: 600; color: var(--navy-800); transition: all 0.3s ease; border: 1px solid transparent; }
@@ -101,6 +100,45 @@
       
       @keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
+      /* ---------- MODAL PHÓNG TO ẢNH ---------- */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(12, 27, 46, 0.85);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-overlay.show { display: flex; opacity: 1; }
+      .modal-content {
+        max-width: 90%;
+        max-height: 90vh;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+      }
+      .modal-overlay.show .modal-content { transform: scale(1); }
+      .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 45px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+      .modal-close:hover { color: var(--burgundy-soft); }
+
       /* ---------- GÓC TÂM LINH ---------- */
       .nav-box { margin-top: 56px; text-align: center; width: 100%; clear: both; }
       .nav-card { background: var(--paper); border: 1px solid var(--stone); padding: 40px; border-radius: 12px; max-width: 600px; margin: 0 auto; box-shadow: 0 10px 30px rgba(12, 27, 46, 0.04); }
@@ -117,7 +155,7 @@
         .station-header h1 { font-size: 1.7em; margin-bottom: 12px; }
         p.intro-sub { font-size: 0.95em; padding: 0 8px; }
         .goc-giai-tri-container { flex-direction: column; }
-        .danh-sach-truyen { padding: 16px; }
+        .danh-sach-truyen { padding: 16px; position: static; height: auto; } /* Fix lỗi menu dính trên đt */
         .khung-noi-dung { padding: 24px 20px; min-height: auto; }
         .noi-dung-chi-tiet h2 { font-size: 1.4em; margin-bottom: 16px; }
         .noi-dung-chi-tiet p { font-size: 0.95em; }
@@ -160,7 +198,7 @@
       </p>
     </div>
 
-    <!-- Khung chính (Sẽ được JavaScript nhúng dữ liệu vào) -->
+    <!-- Khung chính -->
     <div class="goc-giai-tri-container">
       <!-- Vùng Menu Trái -->
       <div class="danh-sach-truyen" id="menu-container">
@@ -181,16 +219,21 @@
         <a href="numerology.html" class="nav-btn">Khám Phá Bản Thân →</a>
       </div>
     </div>
+
+    <!-- Khung Modal dùng để phóng to ảnh -->
+    <div id="image-modal" class="modal-overlay">
+      <span class="modal-close">&times;</span>
+      <img id="modal-img" class="modal-content" alt="Phóng to ảnh" />
+    </div>
     
     <script>
-  // Dán cái link CSV bạn lấy được từ Bước 2 vào đây
   const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXX7LKQGZOebVDHMSAGyxRZDVePYW70nwqa6bS2MkJV6vWE53KFelDHRSKE9XPGWmjqEJ22MqLuPtM/pub?output=csv";
 
   // Hàm 1: Lấy và xử lý dữ liệu từ Google Sheets
   function loadTruyenData() {
     Papa.parse(GOOGLE_SHEET_CSV_URL, {
       download: true,
-      header: true, // Lấy dòng đầu tiên làm key
+      header: true,
       complete: function(results) {
         const rawData = results.data;
         const formattedData = transformData(rawData);
@@ -203,35 +246,44 @@
     });
   }
 
-  // Hàm 2: Biến dữ liệu phẳng của file Excel thành dữ liệu nhóm theo Danh Mục (Category)
+  // Hàm 2: Xử lý dữ liệu thông minh (Ghi nhớ Category và bọc HTML tự động)
   function transformData(rawData) {
     const groupedData = [];
+    let currentCategory = "Chưa phân loại"; 
     
     rawData.forEach((row, index) => {
-      // Bỏ qua các dòng trống
-      if (!row.Category || !row.Title) return; 
+      // 1. Xử lý Category thông minh (lấy từ dòng trên nếu dòng này trống)
+      if (row.Category && row.Category.trim() !== "") {
+        currentCategory = row.Category.trim();
+      }
 
-      // Tìm xem category này đã có trong mảng chưa
-      let group = groupedData.find(g => g.category === row.Category);
+      // Nếu không có Tiêu đề thì bỏ qua
+      if (!row.Title || row.Title.trim() === "") return;
+
+      let group = groupedData.find(g => g.category === currentCategory);
       if (!group) {
-        group = { category: row.Category, items: [] };
+        group = { category: currentCategory, items: [] };
         groupedData.push(group);
       }
 
-      // Xử lý xuống dòng tự động biến thành thẻ <p>
-      let htmlContent = row.Content 
-        ? row.Content.split('\n').map(line => `<p>${line}</p>`).join('') 
-        : '';
+      // 2. Xử lý nội dung thông minh
+      let content = row.Content || "";
+      let htmlContent = content;
+      
+      // Nếu nội dung không có sẵn thẻ <p> hoặc <br> thì tự động bọc thẻ <p>
+      if (!content.includes('<p>') && !content.includes('<br>')) {
+          htmlContent = content.split('\n').map(line => `<p>${line}</p>`).join('');
+      }
 
-      // Nếu có link hình ảnh, tự động chèn thẻ <img> vào cuối nội dung
+      // 3. Nếu có link hình ảnh, thêm thẻ <img> kèm class hỗ trợ click phóng to
       if (row.Image && row.Image.trim() !== "") {
         htmlContent += `<div style='text-align: center; margin-top: 20px;'>
-                          <img src='${row.Image}' style='max-width: 100%; border-radius: 8px;' alt='${row.Title}' />
+                          <img src='${row.Image}' class='zoomable-image' style='max-width: 100%; border-radius: 8px; cursor: zoom-in;' alt='${row.Title}' title='Click để phóng to' />
                         </div>`;
       }
 
       group.items.push({
-        id: "item-" + index, // Tạo ID tự động
+        id: "item-" + index, 
         title: row.Title,
         content: htmlContent
       });
@@ -240,7 +292,7 @@
     return groupedData;
   }
 
-  // Hàm 3: Vẽ giao diện (Giữ nguyên logic cũ của bạn)
+  // Hàm 3: Vẽ giao diện
   function renderGiaoDien(data) {
     const menuContainer = document.getElementById("menu-container");
     const contentContainer = document.getElementById("content-container");
@@ -281,12 +333,13 @@
     attachEvents();
   }
 
-  // Hàm 4: Gắn hiệu ứng (Giữ nguyên của bạn)
+  // Hàm 4: Gắn hiệu ứng (Click đổi truyện & Scroll Mobile & Lightbox Ảnh)
   function attachEvents() {
     const menuParents = document.querySelectorAll(".menu-parent");
     const cacTruyenItem = document.querySelectorAll(".truyen-item");
     const cacNoiDung = document.querySelectorAll(".noi-dung-chi-tiet");
 
+    // Xử lý đóng mở Menu cha
     menuParents.forEach((parent) => {
       parent.addEventListener("click", function () {
         this.classList.toggle("active");
@@ -295,16 +348,49 @@
       });
     });
 
+    // Xử lý khi chọn một truyện
     cacTruyenItem.forEach((item) => {
       item.addEventListener("click", function () {
+        // Xóa active cũ, thêm active mới
         cacTruyenItem.forEach((i) => i.classList.remove("active"));
         cacNoiDung.forEach((nd) => nd.classList.remove("active"));
         this.classList.add("active");
         document.getElementById(this.getAttribute("data-target")).classList.add("active");
+
+        // [TÍNH NĂNG MỚI CHO MOBILE] - Tự động trượt xuống phần nội dung
+        if (window.innerWidth <= 768) {
+          const contentBox = document.getElementById("content-container");
+          // Trừ đi 80px để chừa chỗ cho thanh Header phía trên
+          const y = contentBox.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
       });
+    });
+
+    // [TÍNH NĂNG ZOOM ẢNH] - Khai báo sự kiện click vào ảnh
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("modal-img");
+    const closeModal = document.querySelector(".modal-close");
+
+    document.getElementById("content-container").addEventListener("click", function(e) {
+      if (e.target && e.target.classList.contains("zoomable-image")) {
+        modalImg.src = e.target.src;
+        modal.classList.add("show");
+      }
+    });
+
+    closeModal.addEventListener("click", function() {
+      modal.classList.remove("show");
+    });
+
+    modal.addEventListener("click", function(e) {
+      if (e.target === modal) {
+        modal.classList.remove("show");
+      }
     });
   }
 
+  // Chạy ứng dụng khi load xong trang
   document.addEventListener("DOMContentLoaded", loadTruyenData);
 </script>
   </body>
