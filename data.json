@@ -1,0 +1,62 @@
+[
+  {
+    "category": "Truyện vui nhộn",
+    "items": [
+      {
+        "id": "truyen-1",
+        "title": "Áo không dám mặc..",
+        "content": "<p>Cụ ông tâm sự với cụ bà: “Hôm qua, đi mua lúa giống, tôi được tặng một cái áo mà không dám mặc”</p><p>Sao vậy, áo xấu hả ông?</p><p>Không, rất đẹp.</p><p>Hay ông mặc không vừa?</p><p>Rất vừa.</p><p>Thế thì tại sao?</p><p>Trước áo có dòng chữ “Giống tốt, năng suất cao”</p>"
+      },
+      {
+        "id": "truyen-2",
+        "title": "Bố cháu ở đâu?",
+        "content": "<p>Một cậu bé vô tình làm đổ cái xe chở ngô. Người hàng xóm nghe thấy tiếng động liền bảo:</p><p> “Này, Willis, không sao đâu. Sang đây ăn cơm với bác rồi lát nữa bác lật lại xe cho”.</p><p>“Bác thật là tốt”, Willis trả lời.</p><p> “Nhưng mà cháu sợ bố cháu không thích”.</p><p>“Vớ vẩn, sang đây”, người hàng xóm cào cuột.</p><p> “Thôi được”, cậu bé nhận lời, “nhưng mà thể nào bố cháu cũng ghét”.</p><p>Sau bữa cơm thân mật, Willis cám ơn người hàng xóm tốt bụng và nói:</p><p> “Cháu cảm thấy thoải mái hơn rất nhiều rồi. Nhưng mà cháu biết bố cháu sẽ bực lắm”.</p><p>“Đồ ngốc”, người hàng xóm mỉm cười. “Thế bố cháu đang ở đâu?”“Dưới cái xe ạ”.</p>"
+      },
+      {
+        "id": "truyen-3",
+        "title": "Ba điều ước..",
+        "content": "<p>Một người đàn ông da đen bị lạc trong sa mạc. Trời nắng gắt, khát khô cả cổ mà nhìn xung quanh vẫn chỉ thấy cát là cát. Khi gần như ngất đi, anh kêu lên: “Thượng Đế ơi cứu con!” Tức thì Thượng Đế hiện ra và nói Ta cho con 3 điều ước!” Mừng quá, không ngần ngại, anh ước: – Thứ nhất : Cho con được làm người da trắng. Thứ hai : Lúc nào cũng có một phụ nữ ngồi trong lòng. – Thứ ba : Lúc nào con cũng có nuớc uống. ” OK!” – Thượng Đế mỉm cười, và BÙM!!! Anh bỗng biến thành…”cái toilet nữ “'</p>"
+      }
+    ]
+  },
+  {
+    "category": "Góc thư giãn",
+    "items": [
+      {
+        "id": "thu-gian-1",
+        "title": "Chút tĩnh lặng",
+        "content": "<p>Thi thoảng kẹt xe giữa dòng người hối hả, mở một bản nhạc nhẹ nhàng trong không gian cabin nhỏ, nhìn ra ngoài thấy Sài Gòn vẫn tấp nập như thế. Dù bận rộn hay mệt mỏi, quan trọng là mình vẫn tìm được những khoảnh khắc bình yên cho riêng mình.</p>"
+      },
+      {
+        "id": "thu-gian-2",
+        "title": "Sức mạnh",
+        "content": "<p>Bạn có sức mạnh đối với tâm trí của mình, không phải đối với các sự kiện bên ngoài. Nhận ra điều này, bạn sẽ tìm thấy sức mạnh. (Marcus Aurelius)</p>"
+      },
+      {
+        "id": "thu-gian-3",
+        "title": "Hạnh phúc",
+        "content": "<p>Hàng ngàn ngọn nến có thể được thắp sáng từ một ngọn nến duy nhất, và tuổi thọ của ngọn nến đó sẽ không bị rút ngắn. Hạnh phúc không bao giờ vơi đi khi được sẻ chia.</p>"
+      },
+      {
+      "id": "thu-gian-4",
+        "title": "Sức khỏe",
+        "content": "<p>Bí mật của sức khỏe cho cả tinh thần và thể xác không phải là than khóc cho quá khứ, hay lo sợ tương lai, mà là sống trong giây phút hiện tại một cách thông thái và nghiêm túc.</p>"
+      }
+    ]
+  },
+  {
+    "category": "Ảnh hài hước",
+    "items": [
+      {
+        "id": "anh-1",
+        "title": "Cún con giận ùi",
+        "content": "<div style='text-align: center;'><img src='assets/cuncung.png' alt='Cún sành điệu' style='max-width: 30%; border-radius: 8px;' /></div>"
+      },
+      {
+        "id": "anh-2",
+        "title": "Mèo con đáng yêu",
+        "content": "<div style='text-align: center;'><img src='assets/meocung.jpg' alt='Cún sành điệu' style='max-width: 30%; border-radius: 8px;' /></div>"
+      }
+    ]
+  }
+]

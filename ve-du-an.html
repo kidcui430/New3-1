@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Về Dự Án - Trạm Chữa Lành</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* BỘ MÀU CHUẨN CỦA TRẠM CHỮA LÀNH */
+      :root {
+        --navy-950: #0c1b2e;
+        --navy-800: #1a365d;
+        --burgundy: #7a1c3d;
+        --burgundy-soft: #a84463;
+        --ivory: #f7f5f1;
+        --paper: #fffdfa;
+        --stone: #e9e5de;
+        --gray-600: #5b6572;
+        --white: #ffffff;
+        --serif: "Lora", "Times New Roman", serif;
+        --sans: "Be Vietnam Pro", "Segoe UI", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--ivory); /* Trả về nền trắng ngà dịu mắt */
+        font-family: var(--sans);
+        color: var(--gray-600);
+        position: relative;
+        min-height: 100vh;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      /* ---------- THANH ĐIỀU HƯỚNG DÙNG CHUNG ---------- */
+      .top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+        background: rgba(255, 253, 250, 0.9);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(12, 27, 46, 0.05);
+        z-index: 9000;
+        box-sizing: border-box;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+      .nav-logo-img {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        object-fit: cover;
+        box-shadow: 0 4px 10px rgba(12, 27, 46, 0.1);
+      }
+      .nav-logo-text {
+        font-family: var(--serif);
+        font-size: 1.15em;
+        font-weight: 600;
+        color: var(--navy-950);
+      }
+      .nav-links {
+        display: flex;
+        gap: 36px;
+      }
+      .nav-links a {
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--gray-600);
+        position: relative;
+        transition: color 0.3s;
+      }
+      .nav-links a:hover {
+        color: var(--burgundy);
+      }
+      .nav-links a.active {
+        color: var(--burgundy);
+        font-weight: 600;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: var(--burgundy-soft);
+        transition: width 0.3s ease;
+      }
+      .nav-links a:hover::after,
+      .nav-links a.active::after {
+        width: 100%;
+      }
+
+      .nav-actions .btn-login {
+        text-decoration: none;
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--burgundy);
+        border: 1px solid rgba(122, 28, 61, 0.3);
+        padding: 8px 24px;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+      }
+      .nav-actions .btn-login:hover {
+        background: var(--burgundy);
+        color: var(--white);
+        border-color: var(--burgundy);
+      }
+
+      /* ---------- NỀN ẢNH VÀ HIỆU ỨNG RƠI NHẸ NHÀNG ---------- */
+      .bg-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("link-anh-cua-ban.jpg");
+        background-size: cover;
+        background-position: center;
+        /* Ảnh nền chỉ mờ ảo như sương với opacity thấp để không phá màu ivory */
+        filter: blur(10px);
+        opacity: 0.15;
+        z-index: -1;
+      }
+      .snowflakes {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .snowflake {
+        /* Chuyển tuyết thành dạng cánh hoa/giọt sương màu đỏ đô nhạt để tiệp với nền sáng */
+        position: absolute;
+        color: rgba(122, 28, 61, 0.15);
+        font-size: 1.5em;
+        animation: fall linear infinite;
+      }
+      @keyframes fall {
+        0% {
+          transform: translateY(-10vh) rotate(0deg);
+        }
+        100% {
+          transform: translateY(110vh) rotate(360deg);
+        }
+      }
+      .snowflake:nth-child(1) {
+        left: 10%;
+        animation-duration: 12s;
+        animation-delay: 0s;
+        font-size: 1.2em;
+      }
+      .snowflake:nth-child(2) {
+        left: 20%;
+        animation-duration: 15s;
+        animation-delay: 2s;
+        font-size: 1.8em;
+      }
+      .snowflake:nth-child(3) {
+        left: 30%;
+        animation-duration: 10s;
+        animation-delay: 4s;
+      }
+      .snowflake:nth-child(4) {
+        left: 40%;
+        animation-duration: 18s;
+        animation-delay: 1s;
+        font-size: 1.4em;
+      }
+      .snowflake:nth-child(5) {
+        left: 50%;
+        animation-duration: 14s;
+        animation-delay: 5s;
+      }
+      .snowflake:nth-child(6) {
+        left: 60%;
+        animation-duration: 16s;
+        animation-delay: 3s;
+        font-size: 1.1em;
+      }
+      .snowflake:nth-child(7) {
+        left: 70%;
+        animation-duration: 11s;
+        animation-delay: 6s;
+      }
+      .snowflake:nth-child(8) {
+        left: 80%;
+        animation-duration: 17s;
+        animation-delay: 2s;
+        font-size: 1.6em;
+      }
+      .snowflake:nth-child(9) {
+        left: 90%;
+        animation-duration: 13s;
+        animation-delay: 7s;
+      }
+
+      /* ---------- VÙNG CHỨA VĂN BẢN (LIGHT GLASSMORPHISM) ---------- */
+      .content-container {
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+        padding: 60px 48px;
+        margin: 120px 20px 80px;
+        /* Nền trắng mượt mà như thẻ podcast */
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--stone);
+        border-radius: 12px; /* Bo góc nhẹ hơn cho hiện đại */
+        box-shadow: 0 15px 40px rgba(12, 27, 46, 0.04);
+        text-align: justify;
+      }
+      .content-container p {
+        font-size: 1.05em;
+        color: var(--gray-600);
+        line-height: 1.9;
+        margin-bottom: 28px;
+      }
+      .content-container p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Điểm nhấn cho chữ đầu tiên của bài */
+      .content-container p:first-child::first-letter {
+        font-family: var(--serif);
+        font-size: 3.5em;
+        float: left;
+        margin-right: 14px;
+        margin-top: -8px;
+        line-height: 1;
+        color: var(--burgundy); /* Đỏ đô nổi bật trên nền trắng */
+        font-weight: 600;
+      }
+
+      /* ---------- CHỮ KÝ TÁC GIẢ ---------- */
+      .content-container p.author-signature {
+        text-align: center; /* Căn giữa */
+        color: var(--burgundy); /* Màu đỏ đô giống chữ cái đầu */
+        font-weight: 600; /* In đậm */
+        font-family: var(--serif); /* Dùng font có chân cho nghệ thuật */
+        font-size: 1.15em;
+        margin-top: 40px; /* Đẩy cách xa đoạn văn phía trên một chút */
+        letter-spacing: 2px; /* Kéo giãn khoảng cách các chữ cái ra cho thoáng */
+      }
+
+      /* ---------- RESPONSIVE MOBILE ---------- */
+      @media screen and (max-width: 768px) {
+        /* 1. Tối ưu thanh Nav ngang */
+        .top-nav {
+          padding: 0 12px;
+          height: 60px;
+          gap: 10px;
+        }
+        .nav-logo-img {
+          width: 32px;
+          height: 32px;
+        } /* Thu nhỏ logo lại xíu */
+        .nav-logo-text {
+          display: none;
+        }
+        .nav-links {
+          display: flex;
+          gap: 12px;
+        }
+        .nav-links a {
+          font-size: 13px;
+          font-weight: 600;
+          white-space: nowrap; /* Bắt buộc nằm trên 1 dòng, cấm rớt chữ */
+        }
+        .nav-actions .btn-login {
+          padding: 6px 12px;
+          font-size: 12px;
+          white-space: nowrap;
+        }
+
+        /* 2. Sửa khung chữ nội dung */
+        .content-container {
+          margin: 80px 16px 40px;
+          padding: 28px 20px;
+          text-align: left; /* Chuyển sang căn trái để chữ không bị giãn thưa hoác */
+        }
+        .content-container p {
+          font-size: 14.5px; /* Giảm size chữ để dễ đọc hơn trên đt */
+          line-height: 1.7;
+        }
+
+        /* 3. Thu nhỏ chữ cái đầu bài lại một chút */
+        .content-container p:first-child::first-letter {
+          font-size: 2.6em;
+          margin-right: 10px;
+          margin-top: -4px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- THANH ĐIỀU HƯỚNG -->
+    <nav class="top-nav" id="top-nav">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.jpg" alt="Trạm Chữa Lành" class="nav-logo-img" />
+        <span class="nav-logo-text">Trạm xoa dịu cảm xúc</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="ve-du-an.html" class="active">Về dự án</a>
+        <a href="podcast.html">Lời thì thầm</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="dang-nang-cap.html" class="btn-login">Góc giải trí</a>
+      </div>
+    </nav>
+
+    <!-- Ảnh nền mờ -->
+    <div class="bg-image"></div>
+
+    <!-- Lớp cánh hoa/tuyết rơi -->
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❅</div>
+    </div>
+
+    <!-- Nội dung Lời Thì Thầm -->
+    <div class="content-container">
+      <p>
+        Tôi tạo ra trang web này như một trạm dừng chân bình yên, trước hết là
+        để xoa dịu tâm hồn mình, sau là để vỗ về những người thân yêu xung
+        quanh.
+      </p>
+
+      <p>
+        Mỗi chúng ta đều là một sự tồn tại độc nhất và quý giá. Sẽ có những ngày
+        giông bão khiến bạn cảm thấy lạc lõng, nhưng xin hãy nhớ rằng bạn không
+        hề đơn độc. Không gian này được sinh ra để nhắc nhở bạn học cách tự ôm
+        lấy chính mình khi không có vòng tay nào dang ra, biết bao dung với
+        những vết thương và dịu dàng với từng khuyết điểm.
+      </p>
+
+      <p>
+        Cả vũ trụ bao la vẫn luôn âm thầm che chở và đồng hành cùng bạn qua từng
+        nhịp thở. Hãy luôn trân trọng tâm hồn mình và giữ vững một niềm tin: Bạn
+        là duy nhất, và bạn hoàn toàn xứng đáng được yêu thương.
+      </p>
+      <p class="author-signature">-- TRIẾT VŨ --</p>
+    </div>
+  </body>
+</html>

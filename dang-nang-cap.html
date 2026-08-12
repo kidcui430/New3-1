@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Góc Giải Trí - Trạm Chữa Lành</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ---------- BIẾN MÀU ---------- */
+      :root {
+        --navy-950: #0c1b2e;
+        --navy-800: #1a365d;
+        --navy-700: #233f66;
+        --navy-600: #33517d;
+        --burgundy: #7a1c3d;
+        --burgundy-soft: #a84463;
+        --ivory: #f7f5f1;
+        --paper: #fffdfa;
+        --stone: #e9e5de;
+        --gray-600: #5b6572;
+        --gray-400: #8b93a1;
+        --white: #ffffff;
+        --serif: "Lora", "Times New Roman", serif;
+        --sans: "Be Vietnam Pro", "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: var(--sans);
+        background: var(--ivory);
+        color: var(--gray-600);
+        text-align: center;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        padding: 120px 20px 60px;
+        min-height: 100vh;
+      }
+
+      /* ---------- THANH ĐIỀU HƯỚNG DÙNG CHUNG ---------- */
+      .top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+        background: rgba(255, 253, 250, 0.95);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(12, 27, 46, 0.05);
+        z-index: 9000;
+      }
+      .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+      .nav-logo-img { width: 38px; height: 38px; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 10px rgba(12, 27, 46, 0.1); }
+      .nav-logo-text { font-family: var(--serif); font-size: 1.15em; font-weight: 600; color: var(--navy-950); }
+      .nav-links { display: flex; gap: 36px; }
+      .nav-links a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--gray-600); position: relative; transition: color 0.3s; }
+      .nav-links a:hover, .nav-links a.active { color: var(--burgundy); }
+      .nav-links a::after { content: ""; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: var(--burgundy-soft); transition: width 0.3s ease; }
+      .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+      .nav-actions .btn-login { text-decoration: none; font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--burgundy); border: 1px solid rgba(122, 28, 61, 0.3); padding: 8px 24px; border-radius: 30px; transition: all 0.3s ease; }
+      .nav-actions .btn-login:hover { background: var(--burgundy); color: var(--white); border-color: var(--burgundy); }
+
+      /* ---------- HEADER TRANG ---------- */
+      .station-header { max-width: 640px; margin: 0 auto 56px; }
+      .station-header h1 { font-family: var(--serif); color: var(--navy-800); font-size: 2.6em; line-height: 1.25; font-weight: 600; margin: 0 0 20px; letter-spacing: -0.5px; }
+      p.intro-sub { font-size: 1.08em; line-height: 1.7; color: var(--gray-600); margin: 0 auto; max-width: 480px; }
+
+      /* ---------- BỐ CỤC MASTER - DETAIL ---------- */
+      .goc-giai-tri-container { display: flex; gap: 36px; width: 100%; max-width: 1440px; margin: 0 auto; text-align: left; }
+      
+      .danh-sach-truyen { flex: 0 0 320px; background: var(--paper); padding: 24px; border-radius: 8px; border: 1px solid var(--stone); box-shadow: 0 24px 60px rgba(12, 27, 46, 0.05); height: fit-content; position: sticky;
+        top: 100px; }
+      .danh-sach-truyen h3 { font-family: var(--serif); color: var(--navy-800); margin-top: 0; border-bottom: 1px solid var(--stone); padding-bottom: 16px; margin-bottom: 16px; font-size: 1.25em; font-weight: 600; }
+      .menu-group { margin-bottom: 8px; }
+      .menu-parent { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(12, 27, 46, 0.03); border-radius: 6px; cursor: pointer; font-weight: 600; color: var(--navy-800); transition: all 0.3s ease; border: 1px solid transparent; }
+      .menu-parent:hover { background: rgba(12, 27, 46, 0.06); }
+      .menu-parent.active { background: var(--white); border-color: var(--stone); box-shadow: 0 2px 8px rgba(12, 27, 46, 0.03); }
+      .toggle-icon { font-size: 0.7em; transition: transform 0.3s ease; transform: rotate(-90deg); color: var(--gray-400); }
+      .menu-parent.active .toggle-icon { transform: rotate(0deg); color: var(--navy-800); }
+      .menu-children { display: none; padding-left: 12px; margin-top: 8px; margin-left: 16px; border-left: 1px dashed var(--stone); }
+      .truyen-item { padding: 10px 16px; margin-bottom: 4px; background: transparent; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; border-left: 3px solid transparent; color: var(--gray-600); font-weight: 500; font-size: 14px; }
+      .truyen-item:hover { color: var(--burgundy); background: rgba(122, 28, 61, 0.03); }
+      .truyen-item.active { background: rgba(122, 28, 61, 0.05); border-left: 3px solid var(--burgundy); color: var(--burgundy); font-weight: 600; }
+
+      .khung-noi-dung { flex: 1; background: var(--paper); padding: 40px; border-radius: 8px; border: 1px solid var(--stone); box-shadow: 0 24px 60px rgba(12, 27, 46, 0.05); min-height: 450px; }
+      .noi-dung-chi-tiet { display: none; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+      .noi-dung-chi-tiet.active { display: block; }
+      .noi-dung-chi-tiet h2 { font-family: var(--serif); color: var(--navy-800); margin-top: 0; margin-bottom: 24px; font-size: 1.8em; font-weight: 600; }
+      .noi-dung-chi-tiet p { color: var(--gray-600); font-size: 1.08em; line-height: 1.85; margin-bottom: 16px; }
+      
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+      /* ---------- GÓC TÂM LINH ---------- */
+      .nav-box { margin-top: 56px; text-align: center; width: 100%; clear: both; }
+      .nav-card { background: var(--paper); border: 1px solid var(--stone); padding: 40px; border-radius: 12px; max-width: 600px; margin: 0 auto; box-shadow: 0 10px 30px rgba(12, 27, 46, 0.04); }
+      .nav-eyebrow { font-size: 0.78em; letter-spacing: 3px; text-transform: uppercase; color: var(--burgundy); font-weight: 600; margin: 0 0 12px; }
+      @keyframes modernGlowBlink { 0% { color: var(--navy-800); text-shadow: 0 0 8px rgba(26, 54, 93, 0.1); } 50% { color: var(--burgundy); text-shadow: 0 0 15px rgba(122, 28, 61, 0.35); } 100% { color: var(--navy-800); text-shadow: 0 0 8px rgba(26, 54, 93, 0.1); } }
+      .nav-text { font-family: var(--serif); font-size: 1.35em; margin: 0 0 24px; font-weight: 600; animation: modernGlowBlink 4s infinite ease-in-out; }
+      .nav-btn { display: inline-block; padding: 10px 32px; border-radius: 40px; background: rgba(122, 28, 61, 0.05); color: var(--burgundy); text-decoration: none; font-weight: 500; border: 1px solid rgba(122, 28, 61, 0.3); transition: all 0.35s ease; }
+      .nav-btn:hover { background: var(--burgundy); color: var(--white); box-shadow: 0 8px 20px rgba(122, 28, 61, 0.2); transform: translateY(-2px); }
+
+      /* ---------- RESPONSIVE CHO MOBILE ---------- */
+      @media screen and (max-width: 768px) {
+        body { padding: 90px 16px 40px; } 
+        .station-header { margin-bottom: 36px; }
+        .station-header h1 { font-size: 1.7em; margin-bottom: 12px; }
+        p.intro-sub { font-size: 0.95em; padding: 0 8px; }
+        .goc-giai-tri-container { flex-direction: column; }
+        .danh-sach-truyen { padding: 16px; }
+        .khung-noi-dung { padding: 24px 20px; min-height: auto; }
+        .noi-dung-chi-tiet h2 { font-size: 1.4em; margin-bottom: 16px; }
+        .noi-dung-chi-tiet p { font-size: 0.95em; }
+        
+        .top-nav { padding: 0 12px; height: 60px; gap: 12px; flex-wrap: nowrap !important; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -ms-overflow-style: none; }
+        .top-nav::-webkit-scrollbar { display: none; }
+        .nav-logo { flex-shrink: 0; }
+        .nav-logo-img { width: 30px; height: 30px; }
+        .nav-logo-text { display: none; } 
+        .nav-links { gap: 14px; flex-shrink: 0; align-items: center; }
+        .nav-links a { font-size: 13px; font-weight: 600; white-space: nowrap; }
+        .nav-actions { flex-shrink: 0; margin-left: auto; display: flex; align-items: center; }
+        .nav-actions .btn-login { padding: 6px 14px; font-size: 12px; white-space: nowrap; }
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  </head>
+  <body>
+    <!-- Thanh điều hướng -->
+    <nav class="top-nav" id="top-nav">
+      <a href="index.html?skip=true" class="nav-logo">
+        <img src="logo.jpg" alt="Trạm Chữa Lành" class="nav-logo-img" />
+        <span class="nav-logo-text">Trạm xoa dịu cảm xúc</span>
+      </a>
+      <div class="nav-links">
+        <a href="ve-du-an.html">Về dự án</a>
+        <a href="podcast.html">Lời thì thầm</a>
+      </div>
+      <div class="nav-actions">
+        <a href="dang-nang-cap.html" class="btn-login active">Góc giải trí</a>
+      </div>
+    </nav>
+
+    <!-- Tiêu đề Header -->
+    <div class="station-header">
+      <div style="font-size: 2.2em; margin-bottom: 16px; color: var(--navy-800)">🌿</div>
+      <h1>Góc Giải Trí</h1>
+      <p class="intro-sub">
+        Nơi dừng chân tìm một nụ cười ngày cuối tuần. Chọn một mẩu chuyện bên dưới để thư giãn nhé.
+      </p>
+    </div>
+
+    <!-- Khung chính (Sẽ được JavaScript nhúng dữ liệu vào) -->
+    <div class="goc-giai-tri-container">
+      <!-- Vùng Menu Trái -->
+      <div class="danh-sach-truyen" id="menu-container">
+        <!-- Đang tải dữ liệu... -->
+      </div>
+
+      <!-- Vùng Nội Dung Phải -->
+      <div class="khung-noi-dung" id="content-container">
+        <!-- Đang tải dữ liệu... -->
+      </div>
+    </div> 
+    
+    <!-- Góc tâm linh -->
+    <div class="nav-box">
+      <div class="nav-card">
+        <p class="nav-eyebrow">Đi xa hơn một chút</p>
+        <p class="nav-text">Hãy để vũ trụ trả lời bạn là ai...</p>
+        <a href="numerology.html" class="nav-btn">Khám Phá Bản Thân →</a>
+      </div>
+    </div>
+    
+    <script>
+  // Dán cái link CSV bạn lấy được từ Bước 2 vào đây
+  const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXX7LKQGZOebVDHMSAGyxRZDVePYW70nwqa6bS2MkJV6vWE53KFelDHRSKE9XPGWmjqEJ22MqLuPtM/pub?output=csv";
+
+  // Hàm 1: Lấy và xử lý dữ liệu từ Google Sheets
+  function loadTruyenData() {
+    Papa.parse(GOOGLE_SHEET_CSV_URL, {
+      download: true,
+      header: true, // Lấy dòng đầu tiên làm key
+      complete: function(results) {
+        const rawData = results.data;
+        const formattedData = transformData(rawData);
+        renderGiaoDien(formattedData);
+      },
+      error: function(err) {
+        console.error("Lỗi khi tải dữ liệu từ Google Sheets:", err);
+        document.getElementById("menu-container").innerHTML = "<h3>Lỗi kết nối Sheet</h3>";
+      }
+    });
+  }
+
+  // Hàm 2: Biến dữ liệu phẳng của file Excel thành dữ liệu nhóm theo Danh Mục (Category)
+  function transformData(rawData) {
+    const groupedData = [];
+    
+    rawData.forEach((row, index) => {
+      // Bỏ qua các dòng trống
+      if (!row.Category || !row.Title) return; 
+
+      // Tìm xem category này đã có trong mảng chưa
+      let group = groupedData.find(g => g.category === row.Category);
+      if (!group) {
+        group = { category: row.Category, items: [] };
+        groupedData.push(group);
+      }
+
+      // Xử lý xuống dòng tự động biến thành thẻ <p>
+      let htmlContent = row.Content 
+        ? row.Content.split('\n').map(line => `<p>${line}</p>`).join('') 
+        : '';
+
+      // Nếu có link hình ảnh, tự động chèn thẻ <img> vào cuối nội dung
+      if (row.Image && row.Image.trim() !== "") {
+        htmlContent += `<div style='text-align: center; margin-top: 20px;'>
+                          <img src='${row.Image}' style='max-width: 100%; border-radius: 8px;' alt='${row.Title}' />
+                        </div>`;
+      }
+
+      group.items.push({
+        id: "item-" + index, // Tạo ID tự động
+        title: row.Title,
+        content: htmlContent
+      });
+    });
+
+    return groupedData;
+  }
+
+  // Hàm 3: Vẽ giao diện (Giữ nguyên logic cũ của bạn)
+  function renderGiaoDien(data) {
+    const menuContainer = document.getElementById("menu-container");
+    const contentContainer = document.getElementById("content-container");
+
+    let menuHTML = "<h3>Mục lục</h3>";
+    let contentHTML = "";
+    let isFirstStory = true;
+
+    data.forEach((group, groupIndex) => {
+      const isGroupActive = groupIndex === 0 ? "active" : "";
+      const displayStyle = groupIndex === 0 ? "display: block;" : "display: none;";
+
+      menuHTML += `
+        <div class="menu-group">
+          <div class="menu-parent ${isGroupActive}">
+            ${group.category} <span class="toggle-icon">▼</span>
+          </div>
+          <div class="menu-children" style="${displayStyle}">
+      `;
+
+      group.items.forEach((item) => {
+        const isItemActive = isFirstStory ? "active" : "";
+        menuHTML += `<div class="truyen-item ${isItemActive}" data-target="${item.id}">${item.title}</div>`;
+        contentHTML += `
+          <div id="${item.id}" class="noi-dung-chi-tiet ${isItemActive}">
+            <h2>${item.title}</h2>
+            ${item.content}
+          </div>
+        `;
+        isFirstStory = false;
+      });
+
+      menuHTML += `</div></div>`; 
+    });
+
+    menuContainer.innerHTML = menuHTML;
+    contentContainer.innerHTML = contentHTML;
+    attachEvents();
+  }
+
+  // Hàm 4: Gắn hiệu ứng (Giữ nguyên của bạn)
+  function attachEvents() {
+    const menuParents = document.querySelectorAll(".menu-parent");
+    const cacTruyenItem = document.querySelectorAll(".truyen-item");
+    const cacNoiDung = document.querySelectorAll(".noi-dung-chi-tiet");
+
+    menuParents.forEach((parent) => {
+      parent.addEventListener("click", function () {
+        this.classList.toggle("active");
+        const children = this.nextElementSibling;
+        children.style.display = this.classList.contains("active") ? "block" : "none";
+      });
+    });
+
+    cacTruyenItem.forEach((item) => {
+      item.addEventListener("click", function () {
+        cacTruyenItem.forEach((i) => i.classList.remove("active"));
+        cacNoiDung.forEach((nd) => nd.classList.remove("active"));
+        this.classList.add("active");
+        document.getElementById(this.getAttribute("data-target")).classList.add("active");
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", loadTruyenData);
+</script>
+  </body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thần Số Học &amp; Tử Vi | Triết Vũ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0c1b2e;
+    --navy-800:#1a365d;
+    --navy-700:#233f66;
+    --navy-600:#33517d;
+    --burgundy:#7a1c3d;
+    --burgundy-soft:#a84463;
+    --ivory:#f7f5f1;
+    --paper:#fffdfa;
+    --stone:#e9e5de;
+    --gray-600:#5b6572;
+    --gray-400:#8b93a1;
+    --white:#ffffff;
+    --serif:'Lora','Times New Roman',serif;
+    --sans:'Be Vietnam Pro','Segoe UI',sans-serif;
+  }
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0; font-family:var(--sans); background:var(--ivory); color:var(--gray-600);
+    text-align:center; min-height:100vh; overflow-x:hidden; -webkit-font-smoothing:antialiased;
+  }
+
+  .orb-field{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .orb{ position:absolute; border-radius:50%; filter:blur(60px); animation:breathe 9s ease-in-out infinite; }
+  .orb-a{ width:480px; height:480px; top:-160px; right:-140px; background:radial-gradient(circle, rgba(26,54,93,.15), transparent 70%); }
+  .orb-b{ width:420px; height:420px; bottom:-160px; left:-120px; background:radial-gradient(circle, rgba(122,28,61,.12), transparent 70%); animation-delay:3s; }
+  @keyframes breathe{ 0%,100%{ transform:scale(1); opacity:.75; } 50%{ transform:scale(1.16); opacity:1; } }
+  
+  .page{ position:relative; z-index:1; padding:70px 20px 80px; max-width:1000px; margin:0 auto; }
+
+  .page-header{ max-width:600px; margin:0 auto 50px; }
+  .eyebrow{ font-size:.78em; letter-spacing:3px; text-transform:uppercase; color:var(--burgundy); font-weight:600; margin:0 0 16px; }
+  h1{ font-family:var(--serif); color:var(--navy-800); font-size:2.4em; font-weight:600; letter-spacing:-.5px; margin:0 0 12px; }
+  .subtitle{ font-size:.95em; color:var(--gray-400); letter-spacing:.3px; }
+
+  /* ---------- LAYOUT: INPUT + RESULT ---------- */
+  .reading-layout{ display:flex; gap:36px; align-items:flex-start; justify-content:center; flex-wrap:wrap; }
+
+  .input-card{
+    flex:0 0 320px; background:var(--paper); border-radius:6px; padding:36px 32px;
+    border:1px solid var(--stone); box-shadow:0 16px 40px rgba(12,27,46,.06);
+    text-align:left; position:sticky; top:40px;
+  }
+  .input-label{ font-size:.85em; font-weight:600; color:var(--navy-800); margin-bottom:12px; letter-spacing:.3px; }
+  input[type="date"]{
+    width:100%; padding:14px 16px; font-size:15px; font-family:var(--sans);
+    border-radius:4px; border:1px solid var(--stone); outline:none; margin-bottom:20px;
+    background:var(--ivory); color:var(--navy-800); transition:border-color .3s ease;
+  }
+  input[type="date"]:focus{ border-color:var(--navy-800); }
+  button{
+    width:100%; border:none; padding:14px 20px; font-size:15px; font-weight:600;
+    font-family:var(--sans); letter-spacing:.3px; border-radius:4px; cursor:pointer;
+    color:var(--white); background:var(--navy-800); transition:.3s;
+    box-shadow:0 6px 16px rgba(26,54,93,.2);
+  }
+  button:hover{ background:var(--burgundy); transform:translateY(-1px); }
+  #loading{ display:none; color:var(--burgundy); margin-top:14px; font-size:.85em; font-weight:600; }
+
+  /* ---------- RESULT COLUMN ---------- */
+  .result-column{ flex:1 1 480px; max-width:560px; }
+  #result-box{ display:none; text-align:left; animation:fadeIn .7s cubic-bezier(.16,1,.3,1); }
+
+  .reading-card{
+    position:relative; background:var(--paper); border-radius:6px; border:1px solid var(--stone);
+    box-shadow:0 18px 42px rgba(12,27,46,.06); padding:38px 36px; margin-bottom:28px; overflow:hidden;
+  }
+  .reading-card.core::before{
+    content:''; position:absolute; inset:-1px; z-index:0; border-radius:6px;
+    background:radial-gradient(circle at 0% 0%, rgba(26,54,93,.08), transparent 55%);
+    animation:breathe 7s ease-in-out infinite;
+  }
+  .reading-card > *{ position:relative; z-index:1; }
+
+  .card-eyebrow{ font-size:.72em; letter-spacing:2.5px; text-transform:uppercase; font-weight:700; margin:0 0 8px; }
+  .core .card-eyebrow{ color:var(--navy-600); }
+  .zodiac .card-eyebrow{ color:var(--burgundy-soft); }
+
+  .number-title{ font-family:var(--serif); font-size:1.9em; font-weight:600; color:var(--navy-800); margin:0 0 10px; }
+  .keyword{ font-family:var(--serif); font-style:italic; font-size:1.08em; color:var(--gray-600); margin:0 0 18px; }
+  .description{ font-size:1.02em; line-height:1.85; color:var(--gray-600); }
+
+  .zodiac-title{ font-family:var(--serif); font-size:1.55em; font-weight:600; color:var(--burgundy); margin:0 0 22px; }
+
+  .stat-row{ padding:16px 0; border-top:1px solid var(--stone); }
+  .stat-row:first-of-type{ border-top:none; padding-top:0; }
+  .stat-label{ font-size:.78em; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--navy-700); margin:0 0 8px; }
+  .stat-text{ font-size:1em; line-height:1.8; color:var(--gray-600); margin:0; }
+
+  .back-btn{
+    display:inline-block; margin-top:20px; color:var(--gray-400); text-decoration:none;
+    font-size:14px; letter-spacing:.3px; border-bottom:1px solid var(--stone); padding-bottom:2px;
+    transition:color .3s ease, border-color .3s ease;
+  }
+  .back-btn:hover{ color:var(--burgundy); border-bottom-color:var(--burgundy); }
+  .back-wrap{ text-align:center; margin-top:56px; position:relative; z-index:1; }
+
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+
+  @media screen and (max-width:860px){
+    .reading-layout{ flex-direction:column; align-items:stretch; }
+    .input-card{ flex:1 1 auto; position:static; }
+    .result-column{ max-width:100%; }
+  }
+
+  @media screen and (max-width:600px){
+    .page{ padding:50px 16px 60px; }
+    h1{ font-size:1.9em; }
+    .reading-card{ padding:28px 22px; }
+    .input-card{ padding:28px 22px; }
+    .number-title{ font-size:1.5em; }
+    .zodiac-title{ font-size:1.25em; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .orb, .reading-card.core::before{ animation:none !important; opacity:1 !important; transform:none !important; }
+  }
+</style>
+</head>
+<body>
+<audio id="bg-music" autoplay loop>
+  <source src="nhac-nen.m4a" type="audio/mpeg">
+</audio>
+<div class="orb-field" aria-hidden="true">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+</div>
+
+<div class="page">
+  <div class="page-header">
+    <p class="eyebrow">Góc Nhìn Thần Số Học &amp; Tử Vi</p>
+    <h1>Khám Phá Bản Thân</h1>
+    <p class="subtitle">Designed by Triết</p>
+  </div>
+
+  <div class="reading-layout">
+    <div class="input-card">
+      <p class="input-label">Ngày tháng năm sinh (Dương lịch)</p>
+      <input type="date" id="dob" required>
+      <button onclick="calculate()">Hãy hỏi vũ trụ</button>
+      <div id="loading">Vũ trụ đang lắng nghe... ⏳</div>
+    </div>
+
+    <div class="result-column">
+      <div id="result-box">
+        <div class="reading-card core">
+          <p class="card-eyebrow">Con Số Chủ Đạo</p>
+          <div class="number-title" id="core-number"></div>
+          <div class="keyword" id="core-keyword"></div>
+          <div class="description" id="core-desc"></div>
+        </div>
+
+        <div class="reading-card zodiac">
+          <p class="card-eyebrow">Vận Hạn Năm Nay</p>
+          <div class="zodiac-title" id="zodiac-title"></div>
+          <div id="zodiac-desc"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="back-wrap">
+    <a href="index.html" class="back-btn">← Quay lại Trạm Tâm Trạng</a>
+  </div>
+</div>
+
+<script>
+  const bgMusic = document.getElementById('bg-music');
+  bgMusic.volume = 0.15;
+  bgMusic.play().catch(e => console.log("Không tìm thấy file nhạc"));
+  window.addEventListener('DOMContentLoaded', () => { bgMusic.play().catch(() => {}); });
+  document.body.addEventListener('click', () => { if (bgMusic.paused) bgMusic.play(); }, { once: true });
+  document.body.addEventListener('keydown', () => { if (bgMusic.paused) bgMusic.play(); }, { once: true });
+
+  document.getElementById('dob').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      calculate();
+    }
+  });
+
+  const sheetNumerologyUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSPAEHTWjEtEIhKxMS6E05VrdKLOwIQkqaJunBu36ofJfncPpX6ro2uEuQiaj8AhrcvVAMXAXGh1SOn/pub?gid=0&single=true&output=tsv";
+  const sheetTuviUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSPAEHTWjEtEIhKxMS6E05VrdKLOwIQkqaJunBu36ofJfncPpX6ro2uEuQiaj8AhrcvVAMXAXGh1SOn/pub?gid=1241537300&single=true&output=tsv";
+
+  let numerologyData = {};
+  let tuviData = {};
+
+  async function fetchAllData() {
+    try {
+      const resNum = await fetch(sheetNumerologyUrl);
+      const textNum = await resNum.text();
+      const linesNum = textNum.split('\n');
+      for (let i = 1; i < linesNum.length; i++) {
+        const cols = linesNum[i].split('\t');
+        if (cols.length >= 4) {
+          numerologyData[cols[0].trim()] = {
+            title: cols[1].trim(),
+            keyword: cols[2].trim(),
+            advice: cols[3].trim()
+          };
+        }
+      }
+
+      const resTuvi = await fetch(sheetTuviUrl);
+      const textTuvi = await resTuvi.text();
+      const linesTuvi = textTuvi.split('\n');
+      for (let i = 1; i < linesTuvi.length; i++) {
+        const cols = linesTuvi[i].split('\t');
+        if (cols.length >= 5) {
+          const conGiap = cols[0].trim();
+          tuviData[conGiap] = {
+            tongQuan: cols[1].trim(),
+            suNghiep: cols[2].trim(),
+            taiLoc: cols[3].trim(),
+            tinhCam: cols[4].trim()
+          };
+        }
+      }
+    } catch (error) { console.error("Lỗi kéo data:", error); }
+  }
+
+  fetchAllData();
+
+  function calculate() {
+    const dob = document.getElementById('dob').value;
+    if (!dob) { alert("Vui lòng nhập ngày sinh để tiếp tục."); return; }
+
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('result-box').style.display = 'none';
+
+    setTimeout(() => {
+      const digits = dob.replace(/-/g, '').split('').map(Number);
+      const sumDigits = (arr) => arr.reduce((a, b) => a + b, 0);
+
+      let sum = sumDigits(digits);
+      while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+        sum = sumDigits(sum.toString().split('').map(Number));
+      }
+
+      let resultNum = numerologyData[sum];
+      if (!resultNum) {
+        sum = sumDigits(sum.toString().split('').map(Number));
+        resultNum = numerologyData[sum];
+      }
+
+      if (resultNum) {
+        document.getElementById('core-number').innerText = resultNum.title;
+        document.getElementById('core-keyword').innerText = `Đặc trưng: ${resultNum.keyword}`;
+        document.getElementById('core-desc').innerText = resultNum.advice;
+      } else {
+        document.getElementById('core-number').innerText = "Số " + sum;
+        document.getElementById('core-keyword').innerText = "";
+        document.getElementById('core-desc').innerText = "Hệ thống đang cập nhật dữ liệu cho con số này.";
+      }
+
+      const dateObj = new Date(dob);
+      const year = dateObj.getFullYear();
+
+      const zodiacArray = ["Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi"];
+      const zodiacSign = zodiacArray[year % 12];
+
+      const resultTuvi = tuviData[zodiacSign];
+      const currentYear = new Date().getFullYear();
+
+      document.getElementById('zodiac-title').innerText = `Tuổi ${zodiacSign} — Năm ${currentYear}`;
+
+      if (resultTuvi) {
+        document.getElementById('zodiac-desc').innerHTML = `
+          <div class="stat-row">
+            <p class="stat-label">Tổng Quan</p>
+            <p class="stat-text">${resultTuvi.tongQuan}</p>
+          </div>
+          <div class="stat-row">
+            <p class="stat-label">Sự Nghiệp</p>
+            <p class="stat-text">${resultTuvi.suNghiep}</p>
+          </div>
+          <div class="stat-row">
+            <p class="stat-label">Tài Lộc</p>
+            <p class="stat-text">${resultTuvi.taiLoc}</p>
+          </div>
+          <div class="stat-row">
+            <p class="stat-label">Tình Cảm</p>
+            <p class="stat-text">${resultTuvi.tinhCam}</p>
+          </div>
+        `;
+      } else {
+        document.getElementById('zodiac-desc').innerHTML = `<p class="stat-text">Hệ thống chưa cập nhật dữ liệu cho tuổi ${zodiacSign}.</p>`;
+      }
+
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('result-box').style.display = 'block';
+    }, 800);
+  }
+</script>
+</body>
+</html>
