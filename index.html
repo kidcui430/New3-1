@@ -100,7 +100,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: center; /* Vẫn canh giữa khối nội dung theo màn hình */
         padding: 20px;
         box-sizing: border-box;
         background: var(--navy-950);
@@ -118,7 +118,7 @@
         height: 100%;
         object-fit: cover;
         z-index: 0;
-        filter: blur(6px) brightness(0.9); /* Làm tối và mờ để nổi chữ */
+        filter: blur(6px) brightness(0.9);
         opacity: 0;
         pointer-events: none;
         animation:
@@ -140,38 +140,34 @@
         }
       }
 
+      /* QUOTE SETUP CHO HIỆU ỨNG KARAOKE */
       .intro-quote {
         font-family: var(--serif);
-        font-size: 1.55em;
+        font-size: 1.55em; /* Đã thu nhỏ chữ lại 1 chút */
         font-weight: 400;
-        line-height: 1.85;
-        max-width: 760px;
-        text-align: center;
+        line-height: 2;
+        max-width: 800px;
+        text-align: left; /* Đã canh trái theo yêu cầu */
         position: relative;
         z-index: 2;
+        padding: 0 15px;
       }
-      .intro-quote span {
+
+      .intro-quote span[class^="line-"] {
         display: block;
-        opacity: 0;
-        transform: translateY(14px);
-        animation: slowFadeUp 1.4s ease forwards;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
       }
+
+      /* Set màu cho từng dòng */
       .line-1 {
-        animation-delay: 0.5s;
         color: #93a3bd;
       }
       .line-2 {
-        animation-delay: 2s;
         color: #c3cfe3;
       }
       .line-3 {
-        animation-delay: 3.5s;
-        color: #e6ebf4;
-      }
-      .line-4 {
-        animation-delay: 5.4s;
         margin-top: 26px !important;
+        text-align: center;
         font-style: italic;
         font-weight: 600;
         font-size: 1.15em;
@@ -180,20 +176,52 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-      .line-5 {
-        animation-delay: 6.9s;
-        color: #ffffff;
-        font-weight: 300;
-        letter-spacing: 0.3px;
+
+      /* CSS cho từng chữ chạy karaoke */
+      .word {
+        opacity: 0.15; /* Làm mờ chữ khi chưa hát tới */
+        display: inline-block;
+        transition:
+          opacity 0.2s ease,
+          text-shadow 0.2s ease;
+      }
+      .word.active {
+        opacity: 1; /* Sáng lên khi bông tuyết nhảy vào */
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* Toả sáng nhẹ */
       }
 
-      @keyframes slowFadeUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
+      /* BÔNG TUYẾT KARAOKE */
+      #snowflake {
+        position: fixed;
+        font-size: 20px;
+        color: #fff;
+        text-shadow:
+          0 0 10px #fff,
+          0 0 20px #8ab4f8; /* Hiệu ứng sáng loé */
+        pointer-events: none;
+        z-index: 99999;
+        opacity: 0;
+        /* Chuyển động mượt theo trục ngang, trục dọc dùng keyframe */
+        transition:
+          left 0.15s linear,
+          top 0.15s ease-out;
+      }
+      .jump-anim {
+        animation: bounce-flake 0.2s ease-in-out;
+      }
+      @keyframes bounce-flake {
+        0% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-16px) scale(1.3);
+        } /* Nhảy vút lên */
+        100% {
+          transform: translateY(0) scale(1);
         }
       }
 
+      /* Nút enter (sẽ được JS hiện ra sau) */
       .btn-enter {
         margin-top: 46px;
         background: transparent;
@@ -206,9 +234,7 @@
         text-transform: uppercase;
         border-radius: 2px;
         cursor: pointer;
-        transition: all 0.4s ease;
-        opacity: 1; /* Nút hiện ngay không cần chờ lâu */
-        animation: slowFadeUp 0.4s ease forwards;
+        transition: all 0.6s ease;
         position: relative;
         z-index: 2;
       }
@@ -316,7 +342,7 @@
         opacity: 0;
         visibility: hidden;
         transition: opacity 1.6s ease;
-        padding: 140px 20px 70px; /* Đẩy xuống để không bị menu đè */
+        padding: 140px 20px 70px;
         min-height: 100vh;
       }
 
@@ -354,7 +380,7 @@
         max-width: 480px;
       }
 
-      /* ---------- MOOD SELECTOR (Nút Cảm xúc) ---------- */
+      /* ---------- MOOD SELECTOR ---------- */
       .mood-panel {
         max-width: 760px;
         margin: 0 auto;
@@ -365,7 +391,6 @@
         gap: 12px;
         flex-wrap: wrap;
       }
-
       .btn-mood {
         position: relative;
         overflow: hidden;
@@ -392,8 +417,6 @@
       .btn-mood:active {
         transform: translateY(-1px);
       }
-
-      /* Khởi tạo trái tim ở các góc */
       .btn-mood::before,
       .btn-mood::after {
         content: "♥";
@@ -491,24 +514,18 @@
         }
       }
 
-      /* ---------- RESPONSIVE TỐI ƯU CHO ĐIỆN THOẠI (INDEX) ---------- */
+      /* ---------- RESPONSIVE TỐI ƯU CHO ĐIỆN THOẠI ---------- */
       @media screen and (max-width: 768px) {
-        /* 1. Màn hình chào (Intro) */
         .intro-quote {
-          font-size: 1.05em;
+          font-size: 0.95em;
           padding: 0 12px;
-        }
-        .line-4 {
-          font-size: 1em;
-          margin-top: 16px !important;
+          text-align: left;
         }
         .btn-enter {
           margin-top: 28px;
           padding: 10px 28px;
           font-size: 0.85em;
         }
-
-        /* 2. Thanh Điều Hướng (Top Nav) - Ép không rớt dòng */
         .top-nav {
           padding: 0 12px;
           height: 60px;
@@ -516,10 +533,10 @@
         .nav-logo-img {
           width: 32px;
           height: 32px;
-        } /* Logo nhỏ lại */
+        }
         .nav-logo-text {
           display: none;
-        } /* Ẩn chữ logo để nhường chỗ */
+        }
         .nav-links {
           display: flex;
           gap: 12px;
@@ -527,15 +544,13 @@
         .nav-links a {
           font-size: 13px;
           font-weight: 600;
-          white-space: nowrap; /* Cấm rớt chữ */
+          white-space: nowrap;
         }
         .nav-actions .btn-login {
           padding: 6px 12px;
           font-size: 12px;
           white-space: nowrap;
         }
-
-        /* 3. Không gian chính */
         #main-station {
           padding: 90px 16px 50px;
         }
@@ -551,25 +566,21 @@
           line-height: 1.6;
           padding: 0 8px;
         }
-
-        /* 4. Các nút cảm xúc */
         .btn-group {
           gap: 10px;
         }
         .btn-mood {
           padding: 10px 16px;
           font-size: 13.5px;
-          flex: 1 1 calc(50% - 10px); /* Chia làm 2 cột cân đối */
+          flex: 1 1 calc(50% - 10px);
         }
-
-        /* 5. Khung kết quả Lời thì thầm */
         #result-box {
           margin-top: 40px;
           padding: 32px 20px;
         }
         .quote-icon {
           font-size: 2.5em;
-        } /* Thu nhỏ ngoặc kép */
+        }
         .quote-left {
           top: 4px;
           left: 12px;
@@ -587,41 +598,11 @@
           margin-top: 20px;
           font-size: 0.75em;
         }
-
-        /* 6. Thẻ điều hướng bên dưới */
-        .nav-box {
-          margin-top: 60px;
-        }
-        .nav-card {
-          padding: 28px 20px;
-        }
-        .nav-text {
-          font-size: 1.05em;
-          margin-bottom: 20px;
-        }
-        .nav-btn {
-          padding: 10px 24px;
-          font-size: 13px;
-        }
-      }
-
-      /* Tắt hiệu ứng cho máy yếu */
-      @media (prefers-reduced-motion: reduce) {
-        .orb,
-        #result-box::before,
-        .intro-quote span,
-        .btn-enter,
-        .intro-flower {
-          animation: none !important;
-          opacity: 1 !important;
-          transform: none !important;
-        }
       }
     </style>
   </head>
 
   <body>
-    <!-- Quả cầu lơ lửng -->
     <div class="orb-field" aria-hidden="true">
       <div class="orb orb-a"></div>
       <div class="orb orb-b"></div>
@@ -629,18 +610,22 @@
 
     <!-- MÀN HÌNH CHÀO -->
     <div id="intro-screen">
-      <!-- Hình hoa bồ công anh làm nền chìm -->
       <img src="bo-cong-anh.jpg" alt="Bồ Công Anh" class="intro-flower" />
 
       <div class="intro-quote">
-        <span class="line-1">Bạn vừa đi qua một ngày rất dài.</span>
-        <span class="line-2">Một ngày có lẽ chẳng hề dễ dàng.</span>
-        <span class="line-3">Khó khăn đã đến, sự mệt nhọc vẫn còn đây.</span>
-        <span class="line-4"
-          >Nhưng hãy vui lên, bạn đã ở đây ngay giây phút này.</span
+        <span class="line-1"
+          >"Giữa nhịp sống hối hả, đã bao lâu rồi bạn chưa tự cho mình một
+          khoảng lặng để dừng lại và chạm vào những tầng cảm xúc sâu thẳm
+          nhất?</span
         >
-        <span class="line-5">Hãy cùng tôi nhé...</span>
+        <span class="line-2"
+          >Chào mừng bạn đến với trạm dừng này, nơi ta tạm gác lại thế gian để
+          ngồi xuống, lắng nghe và tự xoa dịu những vết xước trong tâm
+          hồn.</span
+        >
+        <span class="line-3">Hãy cùng tôi nhé..."</span>
       </div>
+
       <button class="btn-enter" onclick="enterStation()">Bước Vào Trạm</button>
     </div>
 
@@ -654,13 +639,9 @@
       <div class="nav-links">
         <a href="ve-du-an.html">Về dự án</a>
         <a href="podcast.html">Lời thì thầm</a>
-        <!-- <a href="cong-dong.html">Cộng đồng</a> -->
       </div>
 
       <div class="nav-actions">
-        <!-- <a href="ve-du-an.html" style="margin-right: 20px">Giới thiệu</a>
-        <a href="podcast.html" style="margin-right: 20px">Lời thì thầm</a> -->
-        <!-- Đổi link trỏ về trang đang nâng cấp -->
         <a href="dang-nang-cap.html" class="btn-login">Góc giải trí</a>
       </div>
     </nav>
@@ -669,6 +650,7 @@
     <audio id="bg-music" loop>
       <source src="nhac-nen.m4a" type="audio/mpeg" />
     </audio>
+
     <!-- KHÔNG GIAN CHÍNH -->
     <div id="main-station">
       <div class="station-header">
@@ -699,21 +681,101 @@
         <div class="quote" id="quote-text"></div>
         <div class="quote-icon quote-right">❝</div>
         <p class="result-caption">Một lời nhắn dành riêng cho bạn</p>
-      </div>     
+      </div>
+    </div>
 
-    <!-- SCRIPT LUÔN PHẢI NẰM CUỐI CÙNG -->
     <script>
       // ==========================================
-      // LOGIC DATA TỪ GOOGLE SHEET
+      // [MỚI] HIỆU ỨNG KARAOKE VÀ BÔNG TUYẾT
+      // ==========================================
+      document.addEventListener("DOMContentLoaded", () => {
+        const lines = document.querySelectorAll(
+          '.intro-quote span[class^="line-"]',
+        );
+        let wordsArray = [];
+
+        // 1. Phân tách từng chữ để làm hiệu ứng
+        lines.forEach((line) => {
+          const text = line.innerText;
+          line.innerText = ""; // Xóa text cứng hiện tại
+
+          const words = text.split(" ");
+          words.forEach((w, index) => {
+            const span = document.createElement("span");
+            span.className = "word";
+            span.innerText = w;
+            line.appendChild(span);
+
+            // Giữ lại khoảng trắng giữa các chữ
+            if (index < words.length - 1) {
+              line.appendChild(document.createTextNode(" "));
+            }
+            wordsArray.push(span);
+          });
+        });
+
+        // 2. Tạo icon bông tuyết nhảy múa
+        const snowflake = document.createElement("div");
+        snowflake.id = "snowflake";
+        snowflake.innerHTML = "❄";
+        document.body.appendChild(snowflake);
+
+        const btnEnter = document.querySelector(".btn-enter");
+        let i = 0;
+
+        function playKaraoke() {
+          if (i >= wordsArray.length) {
+            snowflake.style.opacity = "0"; // Hát xong ẩn bông tuyết
+            return;
+          }
+
+          if (i === 0) snowflake.style.opacity = "1";
+
+          const currentWord = wordsArray[i];
+          currentWord.classList.add("active");
+
+          // Lấy tọa độ chữ hiện tại để di chuyển bông tuyết tới
+          const rect = currentWord.getBoundingClientRect();
+
+          // Canh giữa chữ, bay lơ lửng trên đầu xíu
+          snowflake.style.left = rect.left + rect.width / 2 - 10 + "px";
+          snowflake.style.top = rect.top - 20 + "px";
+
+          // Kích hoạt hiệu ứng nhảy (reset class để chạy lại animation)
+          snowflake.classList.remove("jump-anim");
+          void snowflake.offsetWidth; // Force reflow
+          snowflake.classList.add("jump-anim");
+
+          // Tính toán tốc độ hát: chữ dài thì chờ lâu hơn 1 chút
+          const wordLength = currentWord.innerText.length;
+          let delay = 100 + wordLength * 35;
+
+          // Nếu qua dòng mới (tọa độ Y bị rớt xuống), ngưng lại 1 nhịp cho cảm xúc
+          if (
+            i > 0 &&
+            rect.top > wordsArray[i - 1].getBoundingClientRect().top + 10
+          ) {
+            delay += 400;
+          }
+
+          i++;
+          setTimeout(playKaraoke, delay);
+        }
+
+        // Đợi background mờ lên 1.5s rồi mới bắt đầu hát
+        setTimeout(playKaraoke, 1500);
+      });
+
+      // ==========================================
+      // LOGIC DATA TỪ GOOGLE SHEET (GIỮ NGUYÊN)
       // ==========================================
       const sheetUrl =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vSPAEHTWjEtEIhKxMS6E05VrdKLOwIQkqaJunBu36ofJfncPpX6ro2uEuQiaj8AhrcvVAMXAXGh1SOn/pub?gid=1845686369&single=true&output=tsv";
 
       let allQuotes = [];
       let shuffledQuotes = [];
-      const STORAGE_KEY = "seenQuotes_TramCamXuc"; // Tên chìa khóa lưu trữ trong máy tính
+      const STORAGE_KEY = "seenQuotes_TramCamXuc";
 
-      // Hàm xáo trộn mảng (Giữ nguyên)
       function shuffleDeck(array) {
         let currentIndex = array.length,
           randomIndex;
@@ -728,29 +790,22 @@
         return array;
       }
 
-      // Hàm chuẩn bị danh sách câu chưa xem
       function prepareQuotes() {
-        // 1. Lấy danh sách các câu ĐÃ XEM từ máy tính người dùng
         let seenQuotes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-
-        // 2. Lọc ra danh sách những câu CHƯA XEM
         let unseenQuotes = allQuotes.filter(
           (item) => !seenQuotes.includes(item.quote),
         );
 
-        // 3. Nếu đã xem hết sạch, hoặc Sheet có lỗi, ta reset lại lịch sử xem từ đầu
         if (unseenQuotes.length === 0) {
           seenQuotes = [];
           localStorage.setItem(STORAGE_KEY, JSON.stringify(seenQuotes));
           unseenQuotes = [...allQuotes];
         }
 
-        // 4. Xáo trộn các câu chưa xem và đưa vào băng đạn
         shuffledQuotes = [...unseenQuotes];
         shuffleDeck(shuffledQuotes);
       }
 
-      // Hàm kéo data từ Google Sheet
       async function fetchMoodData() {
         try {
           const response = await fetch(sheetUrl);
@@ -764,8 +819,6 @@
               if (quoteText !== "") allQuotes.push({ quote: quoteText });
             }
           }
-
-          // Gọi hàm lọc và trộn bài sau khi có data
           prepareQuotes();
         } catch (error) {
           console.error("Lỗi kéo data:", error);
@@ -781,25 +834,22 @@
         }
 
         if (shuffledQuotes.length === 0) {
-          // Dự phòng trường hợp băng đạn rỗng
           prepareQuotes();
         }
 
-        // Bốc 1 câu random ra
         const randomItem = shuffledQuotes.pop();
 
-        // LƯU CÂU NÀY VÀO LỊCH SỬ ĐÃ XEM
         let seenQuotes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
         seenQuotes.push(randomItem.quote);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(seenQuotes));
 
-        // Hiển thị ra màn hình
         document.getElementById("quote-text").innerHTML = randomItem.quote;
         document.getElementById("result-box").style.display = "block";
         document
           .getElementById("result-box")
           .scrollIntoView({ behavior: "smooth", block: "center" });
       }
+
       // ==========================================
       // LOGIC VÀO TRẠM (CHUYỂN MÀN HÌNH)
       // ==========================================
@@ -808,9 +858,8 @@
         const main = document.getElementById("main-station");
         const topNav = document.getElementById("top-nav");
 
-        // Gọi thẻ nhạc nền ẩn và cho phát
         const audio = document.getElementById("bg-music");
-        audio.volume = 0.5; // Chỉnh âm lượng (từ 0.0 đến 1.0)
+        audio.volume = 0.5;
         audio.play().catch((e) => console.log("Chưa thể phát nhạc tự động"));
 
         intro.style.opacity = "0";
@@ -819,7 +868,6 @@
           intro.style.visibility = "hidden";
           main.style.visibility = "visible";
           main.style.opacity = "1";
-
           topNav.classList.add("show");
         }, 1400);
       }
