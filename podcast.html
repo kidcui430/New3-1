@@ -1,1 +1,116 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Một góc đọc và lắng nghe của Triết Vũ. Những lời nhắn nhẹ nhàng, câu chuyện và podcast để dừng lại một nhịp."><meta name="theme-color" content="#f7f5ef"><title>Lời thì thầm · Trạm xoa dịu cảm xúc</title><link rel="icon" href="logo.webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"><link rel="stylesheet" href="tram.css"><script src="noi-dung.js" defer></script><script src="tram.js" defer></script></head><body data-page="listen"><a class="skip" href="#main">Đến nội dung chính</a><header class="header"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">t.</span><span>trạm xoa dịu<span class="brand-sub">MỘT GÓC NHỎ CỦA TRIẾT VŨ</span></span></a><nav aria-label="Điều hướng chính"><a href="index.html" data-page="home">Trang chủ</a><a href="bai-viet.html" data-page="read">Góc đọc</a><a href="podcast.html" data-page="listen">Lời thì thầm</a><a href="thu-gian.html" data-page="relax">Thư giãn</a><a href="ve-du-an.html" data-page="about">Về trạm</a></nav><button class="sound" id="sound-toggle" aria-pressed="false">♫ <span>Bật nhạc nền</span></button></header><main id="main"><section class="page-heading wrap"><p class="eyebrow">MỘT CHÚT ÂM THANH, MỘT CHÚT BÌNH YÊN</p><h1>Để lòng mình<br><em>được lắng nghe.</em></h1><p>Những thanh âm thì thầm này luôn ở đây, đợi bạn ghé lại.</p></section><section class="wrap podcast-layout"><aside class="podcast-aside"><div class="record" aria-hidden="true"><span>t.</span></div><h2>Lời thì thầm</h2><p>Chọn một tập và dành cho mình một khoảng nghỉ.</p><span class="eyebrow" id="episode-count"></span></aside><div><div class="player-box"><p class="eyebrow">BẠN ĐANG NGHE</p><h2 id="now-playing">Chọn một tập bên dưới</h2><audio id="episode-player" controls preload="none" aria-label="Trình phát podcast"></audio><div class="player-toolbar"><div class="player-controls-group"><button type="button" class="player-btn" id="speed-btn" title="Điều chỉnh tốc độ phát">⚡ Tốc độ: <span id="speed-val">1.0x</span></button><select class="player-select" id="timer-select" title="Hẹn giờ tắt podcast"><option value="0">⏱ Hẹn giờ tắt: Tắt</option><option value="15">⏱ 15 phút</option><option value="30">⏱ 30 phút</option><option value="45">⏱ 45 phút</option><option value="end">⏱ Hết tập này</option></select><span id="timer-badge" class="timer-badge" style="display:none;"></span></div><div class="player-time" id="player-time-display">--:-- / --:--</div></div><p id="player-status" role="status"></p></div><div id="episodes" class="episodes"></div></div></section></main><footer class="footer"><a class="footer-brand" href="index.html">trạm xoa dịu.</a><p>Một khoảng dừng nhỏ. Một chút dịu dàng cho mình.</p><div><span>Được chăm chút bởi Triết Vũ</span><div><a href="numerology.html" style="margin-right:16px;">Thần số học ↗</a><a href="thu-gian.html">Góc thư giãn ↗</a></div></div></footer><audio id="ambient" src="nhac-nen.m4a" preload="none" loop></audio><p id="audio-status" class="audio-status" role="status"></p></body></html>
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Một góc đọc và lắng nghe của Triết Vũ. Những lời nhắn nhẹ nhàng, câu chuyện và podcast để dừng lại một nhịp."
+    />
+    <meta name="theme-color" content="#f7f5ef" />
+    <title>Lời thì thầm · Trạm xoa dịu cảm xúc</title>
+    <link rel="icon" href="logo.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="tram.css" />
+    <script src="noi-dung.js" defer></script>
+    <script src="tram.js" defer></script>
+  </head>
+  <body data-page="listen">
+    <a class="skip" href="#main">Đến nội dung chính</a>
+    <header class="header">
+      <a class="brand" href="index.html"
+        ><span class="brand-mark" aria-hidden="true">t.</span
+        ><span
+          >trạm xoa dịu<span class="brand-sub"
+            >MỘT GÓC NHỎ CỦA TRIẾT VŨ</span
+          ></span
+        ></a
+      >
+      <nav aria-label="Điều hướng chính">
+        <a href="index.html" data-page="home">Trang chủ</a
+        ><a href="bai-viet.html" data-page="read">Góc đọc</a
+        ><a href="podcast.html" data-page="listen">Lời thì thầm</a
+        ><a href="thu-gian.html" data-page="relax">Thư giãn</a
+        ><a href="ve-du-an.html" data-page="about">Về trạm</a>
+      </nav>
+      <button class="sound" id="sound-toggle" aria-pressed="false">
+        ♫ <span>Bật nhạc nền</span>
+      </button>
+    </header>
+    <main id="main">
+      <section class="page-heading wrap">
+        <p class="eyebrow">MỘT CHÚT ÂM THANH, MỘT CHÚT BÌNH YÊN</p>
+        <h1>Để lòng mình<br /><em>được lắng nghe.</em></h1>
+        <p>Những thanh âm thì thầm này luôn ở đây, đợi bạn ghé lại.</p>
+      </section>
+      <section class="wrap podcast-layout">
+        <aside class="podcast-aside">
+          <div class="record" aria-hidden="true"><span>t.</span></div>
+          <h2>Lời thì thầm</h2>
+          <p>Chọn một tập và dành cho mình một khoảng nghỉ.</p>
+          <span class="eyebrow" id="episode-count"></span>
+        </aside>
+        <div>
+          <div class="player-box">
+            <p class="eyebrow">BẠN ĐANG NGHE</p>
+            <h2 id="now-playing">Chọn một tập bên dưới</h2>
+            <audio
+              id="episode-player"
+              controls
+              preload="none"
+              aria-label="Trình phát podcast"
+            ></audio>
+            <div class="player-toolbar">
+              <div class="player-controls-group">
+                <button
+                  type="button"
+                  class="player-btn"
+                  id="speed-btn"
+                  title="Điều chỉnh tốc độ phát"
+                >
+                  ⚡ Tốc độ: <span id="speed-val">1.0x</span></button
+                ><select
+                  class="player-select"
+                  id="timer-select"
+                  title="Hẹn giờ tắt podcast"
+                >
+                  <option value="0">⏱ Hẹn giờ tắt: Tắt</option>
+                  <option value="15">⏱ 15 phút</option>
+                  <option value="30">⏱ 30 phút</option>
+                  <option value="45">⏱ 45 phút</option>
+                  <option value="end">⏱ Hết tập này</option></select
+                ><span
+                  id="timer-badge"
+                  class="timer-badge"
+                  style="display: none"
+                ></span>
+              </div>
+              <div class="player-time" id="player-time-display">
+                --:-- / --:--
+              </div>
+            </div>
+            <p id="player-status" role="status"></p>
+          </div>
+          <div id="episodes" class="episodes"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <a class="footer-brand" href="index.html">trạm xoa dịu.</a>
+      <p>Một khoảng dừng nhỏ. Một chút dịu dàng cho mình.</p>
+      <div>
+        <span>Được chăm chút bởi Triết Vũ</span>
+        <div>
+          <a href="numerology.html" style="margin-right: 16px">Thần số học ↗</a>
+        </div>
+      </div>
+    </footer>
+    <audio id="ambient" src="nhac-nen.m4a" preload="none" loop></audio>
+    <p id="audio-status" class="audio-status" role="status"></p>
+  </body>
+</html>

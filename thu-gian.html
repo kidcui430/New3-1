@@ -1,263 +1,330 @@
 <!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Góc thư giãn tại Trạm xoa dịu - Mẩu chuyện nhỏ, tranh châm biếm và những điều nhẹ lòng cho ngày thảnh thơi.">
-  <meta name="theme-color" content="#f7f5ef">
-  <title>Góc thư giãn · Trạm xoa dịu cảm xúc</title>
-  <link rel="icon" href="logo.webp">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="tram.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" defer></script>
-  <script src="noi-dung.js" defer></script>
-  <script src="tram.js" defer></script>
-</head>
-<body data-page="relax">
-  <a class="skip" href="#main">Đến nội dung chính</a>
-  
-  <header class="header">
-    <a class="brand" href="index.html">
-      <span class="brand-mark" aria-hidden="true">t.</span>
-      <span>trạm xoa dịu<span class="brand-sub">MỘT GÓC NHỎ CỦA TRIẾT VŨ</span></span>
-    </a>
-    <nav aria-label="Điều hướng chính">
-      <a href="index.html" data-page="home">Trang chủ</a>
-      <a href="bai-viet.html" data-page="read">Góc đọc</a>
-      <a href="podcast.html" data-page="listen">Lời thì thầm</a>
-      <a href="thu-gian.html" data-page="relax">Thư giãn</a>
-      <a href="ve-du-an.html" data-page="about">Về trạm</a>
-    </nav>
-    <button class="sound" id="sound-toggle" aria-pressed="false">♫ <span>Bật nhạc nền</span></button>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Góc thư giãn tại Trạm xoa dịu - Mẩu chuyện nhỏ, tranh châm biếm và những điều nhẹ lòng cho ngày thảnh thơi."
+    />
+    <meta name="theme-color" content="#f7f5ef" />
+    <title>Góc thư giãn · Trạm xoa dịu cảm xúc</title>
+    <link rel="icon" href="logo.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="tram.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"
+      defer
+    ></script>
+    <script src="noi-dung.js" defer></script>
+    <script src="tram.js" defer></script>
+  </head>
+  <body data-page="relax">
+    <a class="skip" href="#main">Đến nội dung chính</a>
 
-  <main id="main">
-    <section class="page-heading wrap">
-      <p class="eyebrow">DỪNG LẠI TÌM MỘT NỤ CƯỜI</p>
-      <h1>Góc thư giãn,<br><em>thong thả một chút.</em></h1>
-      <p>Những mẩu chuyện dí dỏm, góc tranh nhẹ nhàng để giải tỏa sau những giờ căng thẳng.</p>
-    </section>
+    <header class="header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">t.</span>
+        <span
+          >trạm xoa dịu<span class="brand-sub"
+            >MỘT GÓC NHỎ CỦA TRIẾT VŨ</span
+          ></span
+        >
+      </a>
+      <nav aria-label="Điều hướng chính">
+        <a href="index.html" data-page="home">Trang chủ</a>
+        <a href="bai-viet.html" data-page="read">Góc đọc</a>
+        <a href="podcast.html" data-page="listen">Lời thì thầm</a>
+        <a href="thu-gian.html" data-page="relax">Thư giãn</a>
+        <a href="ve-du-an.html" data-page="about">Về trạm</a>
+      </nav>
+      <button class="sound" id="sound-toggle" aria-pressed="false">
+        ♫ <span>Bật nhạc nền</span>
+      </button>
+    </header>
 
-    <!-- Thanh Tab phân loại chuyên mục -->
-    <div class="relax-tabs-wrap wrap" id="relax-tabs-wrap" style="display:none;">
-      <div class="relax-tabs" id="relax-tabs" role="tablist" aria-label="Phân loại nội dung thư giãn"></div>
-    </div>
+    <main id="main">
+      <section class="page-heading wrap">
+        <p class="eyebrow">DỪNG LẠI TÌM MỘT NỤ CƯỜI</p>
+        <h1>Góc thư giãn,<br /><em>thong thả một chút.</em></h1>
+        <p>
+          Những mẩu chuyện dí dỏm, góc tranh nhẹ nhàng để giải tỏa sau những giờ
+          căng thẳng.
+        </p>
+      </section>
 
-    <section class="wrap">
-      <div class="relax-layout">
-        <!-- Cột bên trái: Danh mục bài hoặc Thông tin gallery -->
-        <aside class="relax-menu" id="aside-container">
-          <p class="eyebrow">DANH MỤC TRUYỆN</p>
-          <h3>Mục lục</h3>
-          <div id="menu-container">
-            <p style="font-size:13px;color:var(--muted);padding:10px 0;">Đang kết nối kho truyện...</p>
-          </div>
-        </aside>
+      <!-- Thanh Tab phân loại chuyên mục -->
+      <div
+        class="relax-tabs-wrap wrap"
+        id="relax-tabs-wrap"
+        style="display: none"
+      >
+        <div
+          class="relax-tabs"
+          id="relax-tabs"
+          role="tablist"
+          aria-label="Phân loại nội dung thư giãn"
+        ></div>
+      </div>
 
-        <!-- Cột hiển thị nội dung bên phải: Bài đọc hoặc Lưới ảnh Gallery -->
-        <div>
-          <article class="relax-content" id="content-container">
-            <div style="text-align:center;padding:40px 0;">
-              <p class="eyebrow">HÃY CHỌN MỘT CÂU CHUYỆN</p>
-              <h2 style="font-size:24px;margin-top:10px;">Đang tải nội dung thư giãn...</h2>
+      <section class="wrap">
+        <div class="relax-layout">
+          <!-- Cột bên trái: Danh mục bài hoặc Thông tin gallery -->
+          <aside class="relax-menu" id="aside-container">
+            <p class="eyebrow">DANH MỤC TRUYỆN</p>
+            <h3>Mục lục</h3>
+            <div id="menu-container">
+              <p style="font-size: 13px; color: var(--muted); padding: 10px 0">
+                Đang kết nối kho truyện...
+              </p>
             </div>
-          </article>
+          </aside>
 
-          <!-- Thẻ lối tắt sang Thần số học -->
-          <div class="relax-shortcut-card">
-            <p class="eyebrow">ĐI XA HƠN MỘT CHÚT</p>
-            <h4>Lắng nghe con số của tâm hồn</h4>
-            <p style="font-size:13px;max-width:480px;margin:0 auto 16px;">Khám phá bài học đường đời, điểm mạnh nội tâm và chu kỳ đỉnh cao qua Thần số học & Tử vi.</p>
-            <a class="button primary" href="numerology.html">Khám phá bản thân <span>↗</span></a>
+          <!-- Cột hiển thị nội dung bên phải: Bài đọc hoặc Lưới ảnh Gallery -->
+          <div>
+            <article class="relax-content" id="content-container">
+              <div style="text-align: center; padding: 40px 0">
+                <p class="eyebrow">HÃY CHỌN MỘT CÂU CHUYỆN</p>
+                <h2 style="font-size: 24px; margin-top: 10px">
+                  Đang tải nội dung thư giãn...
+                </h2>
+              </div>
+            </article>
+
+            <!-- Thẻ lối tắt sang Thần số học -->
+            <div class="relax-shortcut-card">
+              <p class="eyebrow">ĐI XA HƠN MỘT CHÚT</p>
+              <h4>Lắng nghe con số của tâm hồn</h4>
+              <p style="font-size: 13px; max-width: 480px; margin: 0 auto 16px">
+                Khám phá bài học đường đời, điểm mạnh nội tâm và chu kỳ đỉnh cao
+                qua Thần số học & Tử vi.
+              </p>
+              <a class="button primary" href="numerology.html"
+                >Khám phá bản thân <span>↗</span></a
+              >
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
-  <!-- Modal phóng to ảnh -->
-  <div id="image-modal" class="image-modal" role="dialog" aria-label="Phóng to hình ảnh">
-    <button type="button" class="modal-close-btn" aria-label="Đóng">&times;</button>
-    <img id="modal-img" src="" alt="Hình ảnh phóng to">
-  </div>
-
-  <footer class="footer">
-    <a class="footer-brand" href="index.html">trạm xoa dịu.</a>
-    <p>Một khoảng dừng nhỏ. Một chút dịu dàng cho mình.</p>
-    <div>
-      <span>Được chăm chút bởi Triết Vũ</span>
-      <div>
-        <a href="numerology.html" style="margin-right:16px;">Thần số học ↗</a>
-        <a href="thu-gian.html">Góc thư giãn ↗</a>
-      </div>
+    <!-- Modal phóng to ảnh -->
+    <div
+      id="image-modal"
+      class="image-modal"
+      role="dialog"
+      aria-label="Phóng to hình ảnh"
+    >
+      <button type="button" class="modal-close-btn" aria-label="Đóng">
+        &times;
+      </button>
+      <img id="modal-img" src="" alt="Hình ảnh phóng to" />
     </div>
-  </footer>
 
-  <audio id="ambient" src="nhac-nen.m4a" preload="none" loop></audio>
-  <p id="audio-status" class="audio-status" role="status"></p>
+    <footer class="footer">
+      <a class="footer-brand" href="index.html">trạm xoa dịu.</a>
+      <p>Một khoảng dừng nhỏ. Một chút dịu dàng cho mình.</p>
+      <div>
+        <span>Được chăm chút bởi Triết Vũ</span>
+        <div>
+          <a href="numerology.html" style="margin-right: 16px">Thần số học ↗</a>
+        </div>
+      </div>
+    </footer>
 
-  <script>
-    const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXX7LKQGZOebVDHMSAGyxRZDVePYW70nwqa6bS2MkJV6vWE53KFelDHRSKE9XPGWmjqEJ22MqLuPtM/pub?output=csv";
+    <audio id="ambient" src="nhac-nen.m4a" preload="none" loop></audio>
+    <p id="audio-status" class="audio-status" role="status"></p>
 
-    let loadedData = [];
-    let activeCategoryIndex = 0;
+    <script>
+      const GOOGLE_SHEET_CSV_URL =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXX7LKQGZOebVDHMSAGyxRZDVePYW70nwqa6bS2MkJV6vWE53KFelDHRSKE9XPGWmjqEJ22MqLuPtM/pub?output=csv";
 
-    function escapeHtml(str) {
-      if (!str) return "";
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
+      let loadedData = [];
+      let activeCategoryIndex = 0;
 
-    function loadTruyenData() {
-      if (typeof Papa === 'undefined') {
-        setTimeout(loadTruyenData, 200);
-        return;
+      function escapeHtml(str) {
+        if (!str) return "";
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
       }
-      Papa.parse(GOOGLE_SHEET_CSV_URL, {
-        download: true,
-        header: true,
-        complete: function(results) {
-          loadedData = transformData(results.data || []);
-          initApp(loadedData);
-        },
-        error: function(err) {
-          console.error("Lỗi khi tải dữ liệu từ Google Sheets:", err);
-          const aside = document.getElementById("aside-container");
-          if (aside) {
-            aside.innerHTML = "<p style='color:var(--accent);font-size:13px;'>Tạm thời chưa kết nối được kho thư giãn. Bạn thử tải lại trang nhé.</p>";
+
+      function loadTruyenData() {
+        if (typeof Papa === "undefined") {
+          setTimeout(loadTruyenData, 200);
+          return;
+        }
+        Papa.parse(GOOGLE_SHEET_CSV_URL, {
+          download: true,
+          header: true,
+          complete: function (results) {
+            loadedData = transformData(results.data || []);
+            initApp(loadedData);
+          },
+          error: function (err) {
+            console.error("Lỗi khi tải dữ liệu từ Google Sheets:", err);
+            const aside = document.getElementById("aside-container");
+            if (aside) {
+              aside.innerHTML =
+                "<p style='color:var(--accent);font-size:13px;'>Tạm thời chưa kết nối được kho thư giãn. Bạn thử tải lại trang nhé.</p>";
+            }
+          },
+        });
+      }
+
+      function transformData(rawData) {
+        const groupedData = [];
+        let currentCategory = "Chuyện nhẹ nhàng";
+
+        rawData.forEach((row, index) => {
+          if (row.Category && row.Category.trim() !== "") {
+            currentCategory = row.Category.trim();
           }
-        }
-      });
-    }
+          if (!row.Title || row.Title.trim() === "") return;
 
-    function transformData(rawData) {
-      const groupedData = [];
-      let currentCategory = "Chuyện nhẹ nhàng";
-      
-      rawData.forEach((row, index) => {
-        if (row.Category && row.Category.trim() !== "") {
-          currentCategory = row.Category.trim();
-        }
-        if (!row.Title || row.Title.trim() === "") return;
+          let group = groupedData.find((g) => g.category === currentCategory);
+          if (!group) {
+            group = { category: currentCategory, items: [] };
+            groupedData.push(group);
+          }
 
-        let group = groupedData.find(g => g.category === currentCategory);
-        if (!group) {
-          group = { category: currentCategory, items: [] };
-          groupedData.push(group);
-        }
+          let rawText = row.Content ? row.Content.trim() : "";
+          let htmlContent = rawText;
+          if (
+            rawText &&
+            !rawText.includes("<p>") &&
+            !rawText.includes("<br>")
+          ) {
+            htmlContent = rawText
+              .split("\n")
+              .filter((l) => l.trim())
+              .map((line) => `<p>${escapeHtml(line)}</p>`)
+              .join("");
+          }
 
-        let rawText = row.Content ? row.Content.trim() : "";
-        let htmlContent = rawText;
-        if (rawText && !rawText.includes('<p>') && !rawText.includes('<br>')) {
-          htmlContent = rawText.split('\n').filter(l => l.trim()).map(line => `<p>${escapeHtml(line)}</p>`).join('');
-        }
-
-        let imageVal = row.Image ? row.Image.trim() : "";
-        if (imageVal) {
-          if (imageVal.toLowerCase().startsWith("<iframe")) {
-            htmlContent += `<div style='text-align:center;margin-top:24px;'>${imageVal}</div>`;
-          } else {
-            htmlContent += `<div style='text-align:center;margin-top:24px;'>
+          let imageVal = row.Image ? row.Image.trim() : "";
+          if (imageVal) {
+            if (imageVal.toLowerCase().startsWith("<iframe")) {
+              htmlContent += `<div style='text-align:center;margin-top:24px;'>${imageVal}</div>`;
+            } else {
+              htmlContent += `<div style='text-align:center;margin-top:24px;'>
               <img src='${imageVal}' class='zoomable-image' alt='${escapeHtml(row.Title)}' title='Click để phóng to ảnh' />
             </div>`;
+            }
           }
+
+          group.items.push({
+            id: "item-" + index,
+            category: currentCategory,
+            title: row.Title.trim(),
+            content: htmlContent,
+            rawContent: rawText,
+            image: imageVal,
+          });
+        });
+
+        return groupedData;
+      }
+
+      function isGalleryCategory(group) {
+        if (!group || !group.items || group.items.length === 0) return false;
+        const name = (group.category || "").toLowerCase();
+        if (
+          name.includes("ảnh") ||
+          name.includes("hình") ||
+          name.includes("tranh") ||
+          name.includes("meme") ||
+          name.includes("photo") ||
+          name.includes("gallery")
+        ) {
+          return true;
+        }
+        const itemsWithImg = group.items.filter(
+          (it) => it.image && it.image.trim() !== "",
+        ).length;
+        return itemsWithImg >= group.items.length * 0.7;
+      }
+
+      function initApp(data) {
+        if (!data || data.length === 0) {
+          const aside = document.getElementById("aside-container");
+          const content = document.getElementById("content-container");
+          if (aside)
+            aside.innerHTML =
+              "<p style='font-size:13px;'>Chưa có nội dung thư giãn.</p>";
+          if (content)
+            content.innerHTML =
+              "<p style='font-size:14px;color:var(--muted);text-align:center;'>Kho thư giãn đang được cập nhật thêm.</p>";
+          return;
         }
 
-        group.items.push({
-          id: "item-" + index,
-          category: currentCategory,
-          title: row.Title.trim(),
-          content: htmlContent,
-          rawContent: rawText,
-          image: imageVal
-        });
-      });
-
-      return groupedData;
-    }
-
-    function isGalleryCategory(group) {
-      if (!group || !group.items || group.items.length === 0) return false;
-      const name = (group.category || "").toLowerCase();
-      if (name.includes("ảnh") || name.includes("hình") || name.includes("tranh") || name.includes("meme") || name.includes("photo") || name.includes("gallery")) {
-        return true;
-      }
-      const itemsWithImg = group.items.filter(it => it.image && it.image.trim() !== "").length;
-      return itemsWithImg >= group.items.length * 0.7;
-    }
-
-    function initApp(data) {
-      if (!data || data.length === 0) {
-        const aside = document.getElementById("aside-container");
-        const content = document.getElementById("content-container");
-        if (aside) aside.innerHTML = "<p style='font-size:13px;'>Chưa có nội dung thư giãn.</p>";
-        if (content) content.innerHTML = "<p style='font-size:14px;color:var(--muted);text-align:center;'>Kho thư giãn đang được cập nhật thêm.</p>";
-        return;
+        renderTabs(data);
+        renderCategoryView(data[activeCategoryIndex]);
+        initModal();
       }
 
-      renderTabs(data);
-      renderCategoryView(data[activeCategoryIndex]);
-      initModal();
-    }
+      function renderTabs(data) {
+        const tabsWrap = document.getElementById("relax-tabs-wrap");
+        const tabsContainer = document.getElementById("relax-tabs");
+        if (!tabsWrap || !tabsContainer) return;
 
-    function renderTabs(data) {
-      const tabsWrap = document.getElementById("relax-tabs-wrap");
-      const tabsContainer = document.getElementById("relax-tabs");
-      if (!tabsWrap || !tabsContainer) return;
+        if (data.length <= 1) {
+          tabsWrap.style.display = "none";
+          return;
+        }
 
-      if (data.length <= 1) {
-        tabsWrap.style.display = "none";
-        return;
-      }
-
-      tabsWrap.style.display = "flex";
-      let html = "";
-      data.forEach((group, idx) => {
-        const isActive = idx === activeCategoryIndex ? "active" : "";
-        html += `
+        tabsWrap.style.display = "flex";
+        let html = "";
+        data.forEach((group, idx) => {
+          const isActive = idx === activeCategoryIndex ? "active" : "";
+          html += `
           <button type="button" class="relax-tab-btn ${isActive}" data-category-index="${idx}">
             <span>${escapeHtml(group.category)}</span>
             <span class="tab-badge">${group.items.length}</span>
           </button>
         `;
-      });
-      tabsContainer.innerHTML = html;
-
-      tabsContainer.querySelectorAll(".relax-tab-btn").forEach(btn => {
-        btn.addEventListener("click", function() {
-          const idx = parseInt(this.getAttribute("data-category-index"), 10);
-          if (idx !== activeCategoryIndex && data[idx]) {
-            activeCategoryIndex = idx;
-            tabsContainer.querySelectorAll(".relax-tab-btn").forEach(b => b.classList.remove("active"));
-            this.classList.add("active");
-            renderCategoryView(data[activeCategoryIndex]);
-          }
         });
-      });
-    }
+        tabsContainer.innerHTML = html;
 
-    function renderCategoryView(group) {
-      const aside = document.getElementById("aside-container");
-      const content = document.getElementById("content-container");
-      if (!aside || !content || !group) return;
-
-      if (isGalleryCategory(group)) {
-        renderGalleryLayout(group, aside, content);
-      } else {
-        renderStoryLayout(group, aside, content);
+        tabsContainer.querySelectorAll(".relax-tab-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const idx = parseInt(this.getAttribute("data-category-index"), 10);
+            if (idx !== activeCategoryIndex && data[idx]) {
+              activeCategoryIndex = idx;
+              tabsContainer
+                .querySelectorAll(".relax-tab-btn")
+                .forEach((b) => b.classList.remove("active"));
+              this.classList.add("active");
+              renderCategoryView(data[activeCategoryIndex]);
+            }
+          });
+        });
       }
-    }
 
-    function renderGalleryLayout(group, aside, content) {
-      content.classList.add("gallery-mode");
+      function renderCategoryView(group) {
+        const aside = document.getElementById("aside-container");
+        const content = document.getElementById("content-container");
+        if (!aside || !content || !group) return;
 
-      aside.innerHTML = `
+        if (isGalleryCategory(group)) {
+          renderGalleryLayout(group, aside, content);
+        } else {
+          renderStoryLayout(group, aside, content);
+        }
+      }
+
+      function renderGalleryLayout(group, aside, content) {
+        content.classList.add("gallery-mode");
+
+        aside.innerHTML = `
         <p class="eyebrow">BỘ SƯU TẬP HÌNH ẢNH</p>
         <h3>${escapeHtml(group.category)}</h3>
         <p style="font-size:13px;line-height:1.8;color:var(--muted);margin:14px 0 16px;">
@@ -271,47 +338,59 @@
         </p>
       `;
 
-      let galleryItemsHtml = group.items.map(item => {
-        let mediaHtml = "";
-        const isEmbed = item.image.toLowerCase().startsWith("<iframe");
-        if (isEmbed) {
-          mediaHtml = `<div class="gallery-embed">${item.image}</div>`;
-        } else if (item.image) {
-          mediaHtml = `
+        let galleryItemsHtml = group.items
+          .map((item) => {
+            let mediaHtml = "";
+            const isEmbed = item.image.toLowerCase().startsWith("<iframe");
+            if (isEmbed) {
+              mediaHtml = `<div class="gallery-embed">${item.image}</div>`;
+            } else if (item.image) {
+              mediaHtml = `
             <div class="gallery-media">
               <img src="${item.image}" alt="${escapeHtml(item.title)}" class="gallery-photo zoomable-image" loading="lazy" title="Nhấp để phóng to" onerror="this.onerror=null;this.parentElement.style.padding='28px 16px';this.parentElement.innerHTML='<span style=\\'color:var(--muted);font-size:12px;font-style:italic;\\'>Không thể tải ảnh</span>'" />
             </div>`;
-        } else {
-          mediaHtml = `<div class="gallery-media" style="padding:30px;color:var(--muted);font-size:13px;">Chưa có ảnh</div>`;
-        }
+            } else {
+              mediaHtml = `<div class="gallery-media" style="padding:30px;color:var(--muted);font-size:13px;">Chưa có ảnh</div>`;
+            }
 
-        const showCaption = (item.title && !item.title.toLowerCase().startsWith("item")) || item.rawContent;
-        return `
+            const showCaption =
+              (item.title && !item.title.toLowerCase().startsWith("item")) ||
+              item.rawContent;
+            return `
           <div class="gallery-card">
             ${mediaHtml}
-            ${showCaption ? `
+            ${
+              showCaption
+                ? `
               <div class="gallery-info">
-                ${item.title ? `<div class="gallery-title">${escapeHtml(item.title)}</div>` : ''}
-                ${item.rawContent ? `<p class="gallery-desc">${escapeHtml(item.rawContent)}</p>` : ''}
+                ${item.title ? `<div class="gallery-title">${escapeHtml(item.title)}</div>` : ""}
+                ${item.rawContent ? `<p class="gallery-desc">${escapeHtml(item.rawContent)}</p>` : ""}
               </div>
-            ` : ''}
+            `
+                : ""
+            }
           </div>
         `;
-      }).join("");
+          })
+          .join("");
 
-      content.innerHTML = `<div class="relax-gallery-grid">${galleryItemsHtml}</div>`;
-    }
+        content.innerHTML = `<div class="relax-gallery-grid">${galleryItemsHtml}</div>`;
+      }
 
-    function renderStoryLayout(group, aside, content) {
-      content.classList.remove("gallery-mode");
+      function renderStoryLayout(group, aside, content) {
+        content.classList.remove("gallery-mode");
 
-      let menuItemsHtml = group.items.map((item, idx) => `
-        <div class="story-item ${idx === 0 ? 'active' : ''}" data-target="${item.id}">
+        let menuItemsHtml = group.items
+          .map(
+            (item, idx) => `
+        <div class="story-item ${idx === 0 ? "active" : ""}" data-target="${item.id}">
           ${escapeHtml(item.title)}
         </div>
-      `).join("");
+      `,
+          )
+          .join("");
 
-      aside.innerHTML = `
+        aside.innerHTML = `
         <p class="eyebrow">CHUYÊN MỤC</p>
         <h3>${escapeHtml(group.category)}</h3>
         <div class="category-items" style="margin-top:14px;">
@@ -319,69 +398,82 @@
         </div>
       `;
 
-      let contentItemsHtml = group.items.map((item, idx) => `
-        <div id="${item.id}" class="story-detail-box" style="${idx === 0 ? 'display:block;' : 'display:none;'}">
+        let contentItemsHtml = group.items
+          .map(
+            (item, idx) => `
+        <div id="${item.id}" class="story-detail-box" style="${idx === 0 ? "display:block;" : "display:none;"}">
           <p class="eyebrow">${escapeHtml(item.category)}</p>
           <h2 class="story-title">${escapeHtml(item.title)}</h2>
           <div class="story-meta">Góc thư giãn · Triết Vũ</div>
           <div class="story-body">${item.content}</div>
         </div>
-      `).join("");
+      `,
+          )
+          .join("");
 
-      content.innerHTML = contentItemsHtml;
+        content.innerHTML = contentItemsHtml;
 
-      const items = aside.querySelectorAll(".story-item");
-      const details = content.querySelectorAll(".story-detail-box");
+        const items = aside.querySelectorAll(".story-item");
+        const details = content.querySelectorAll(".story-detail-box");
 
-      items.forEach(item => {
-        item.addEventListener("click", function() {
-          items.forEach(i => i.classList.remove("active"));
-          details.forEach(d => d.style.display = "none");
-          this.classList.add("active");
-          const target = document.getElementById(this.getAttribute("data-target"));
-          if (target) {
-            target.style.display = "block";
-          }
-
-          if (window.innerWidth <= 900) {
-            const contentBox = document.getElementById("content-container");
-            if (contentBox) {
-              const y = contentBox.getBoundingClientRect().top + window.scrollY - 80;
-              window.scrollTo({ top: y, behavior: 'smooth' });
+        items.forEach((item) => {
+          item.addEventListener("click", function () {
+            items.forEach((i) => i.classList.remove("active"));
+            details.forEach((d) => (d.style.display = "none"));
+            this.classList.add("active");
+            const target = document.getElementById(
+              this.getAttribute("data-target"),
+            );
+            if (target) {
+              target.style.display = "block";
             }
+
+            if (window.innerWidth <= 900) {
+              const contentBox = document.getElementById("content-container");
+              if (contentBox) {
+                const y =
+                  contentBox.getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({ top: y, behavior: "smooth" });
+              }
+            }
+          });
+        });
+      }
+
+      function initModal() {
+        const modal = document.getElementById("image-modal");
+        const modalImg = document.getElementById("modal-img");
+        const closeBtn = document.querySelector(".modal-close-btn");
+
+        document.addEventListener("click", function (e) {
+          if (e.target && e.target.classList.contains("zoomable-image")) {
+            modalImg.src = e.target.src;
+            modal.classList.add("active");
           }
         });
-      });
-    }
 
-    function initModal() {
-      const modal = document.getElementById("image-modal");
-      const modalImg = document.getElementById("modal-img");
-      const closeBtn = document.querySelector(".modal-close-btn");
-
-      document.addEventListener("click", function(e) {
-        if (e.target && e.target.classList.contains("zoomable-image")) {
-          modalImg.src = e.target.src;
-          modal.classList.add("active");
+        if (closeBtn) {
+          closeBtn.addEventListener("click", () =>
+            modal.classList.remove("active"),
+          );
         }
-      });
-
-      if (closeBtn) {
-        closeBtn.addEventListener("click", () => modal.classList.remove("active"));
-      }
-      if (modal) {
-        modal.addEventListener("click", (e) => {
-          if (e.target === modal) modal.classList.remove("active");
+        if (modal) {
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.classList.remove("active");
+          });
+        }
+        document.addEventListener("keydown", function (e) {
+          if (
+            e.key === "Escape" &&
+            modal &&
+            modal.classList.contains("active")
+          ) {
+            modal.classList.remove("active");
+          }
         });
       }
-      document.addEventListener("keydown", function(e) {
-        if (e.key === "Escape" && modal && modal.classList.contains("active")) {
-          modal.classList.remove("active");
-        }
-      });
-    }
 
-    document.addEventListener("DOMContentLoaded", loadTruyenData);
-  </script>
-</body>
+      document.addEventListener("DOMContentLoaded", loadTruyenData);
+    </script>
+  </body>
 </html>
