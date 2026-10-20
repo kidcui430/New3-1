@@ -24,7 +24,7 @@ window.TRAM_CONTENT = {
       file: "tap-3.mp3",
     },
     {
-      title: "Tập 4: Brainrot",
+      title: "Tập 4: Tâm trí con người-món quà vô giá",
       description: "Lm GB Phương Đình Toại",
       file: "tap-4.mp3",
     },
@@ -34,12 +34,12 @@ window.TRAM_CONTENT = {
       file: "tap-5.mp3",
     },
     {
-      title: "Tập 6: Kỷ luật",
+      title: "Tập 6: Kỷ luật-tự do",
       description: "AI auto",
       file: "tap-6.mp3",
     },
     {
-      title: "Tập 7: Mọi sự thất bại đến từ đâu",
+      title: "Tập 7: Mọi sự thất bại hãy nhìn lại",
       description: "Giọng đọc Thầy Pháp Hòa",
       file: "tap-7.mp3",
     },
